@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>GamerFriend</title>
+    <link rel="stylesheet" href="project.css">
+  </head>
+  <img src="10.png" class="bg" alt="bg">
+    <div id="page-wrap">
+      <!-- Navbar -->
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="lii"><header class="neonText"> GamerFriend - The Ultimate Gameshop Finder</header></li>
+        <li class="ri"><button class="button2" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
+        <li class="ri"><button class="button2" onclick="document.getElementById('id02').style.display='block'">Submit Location</button></li>
+      </ul>
+
+          <div id="id01" class="modal"> <!-- start of login_tab -->
+            <form class="modal-content animate" action="/action_page.php" method="post">
+              <div class="container">
+                <label id="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+                <label id="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <button type="submit">Login</button>
+                <label>
+                  <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+              </div>
+
+              <div class="text" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+              </div>
+            </form>
+          </div>
+
+          <div id="id02" class="modal"> <!-- start of login_tab -->
+            <form class="modal-content animate" action="/action_page.php" method="post">
+              <div class="container">
+                <p style="font-size:30px">New Location</p>
+                <label id="locationname"><b>location Name</b></label>
+                <input type="text" placeholder="Enter location Name" name="locationname" required>
+                <label id="coordinate"><b>(Latitude,Longtitude)</b></label>
+                <input type="text" placeholder="Enter coordinate eg.(108.232,90.367)" name="coordinate">
+                <p>Describtion</p>
+                <textarea name="describtion" style="width:1000px; height:160px">
+                </textarea>
+                <button>upload picture or vedio</button>
+                <p></p>
+                <button type="submit">submit</button>
+
+              </div>
+            </form>
+          </div>
+
+          <script> // The script control login page
+          // Get the login_tab
+          var modal = document.getElementById('id01');
+          var modal2 = document.getElementById('id02');
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+              }
+              else if (event.target == modal2) {
+                  modal2.style.display = "none";
+              }
+          }
+          </script>
+
+      <p></p> <!-- add this for add spacing -->
+
+  <!-- NO CHANGE ABOVE -->
+    <div class="width">
+    <h1 class = "neonText">EBGAMES</h1>
+    <hr class="neon">
+    <div class="row">
+      <div class="column2">
+        <h2 class="neonText">location on map</h2>
+        <img src="l1.png" class="img" alt="location">
+        <p class="neonText">Some info here</p>
+        <iframe width="420" height="315"
+        src="https://www.youtube.com/embed/GbahxwcI11Y?autoplay=1&mute=1">
+        </iframe>
+      </div>
+      <div class="column2">
+        <div class = "neonbox card">
+        <h2 class="neonText">EB games</h2>
+        <img src="r1.jpg" style="width:100%" alt="shopimage">
+        <p class="whitetext">2.2km <b>from you</b></p>
+        <p class="whitetext"><b>Address: </b>University Plaza, 101 Osler Dr Unit 134B, Dundas, ON L9H 4H4</p>
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <div class="comment_area">
+
+
+      <div class="neonbox">
+      <p class="neonText" style="text-align:left;margin-left:30px">Sample user - Sample title</p>
+      <div class="width" style="margin:10px"><hr class="neon"></div>
+      <div class="fixrating">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+      </div>
+      <p class="comment_text">yo this shop is da best!</p>
+      <p class="timestamp" style="text-align:right">timestamp</p>
+      </div>
+    <p></p>
+      <div class="neonbox">
+      <p class="neonText" style="text-align:left;margin-left:30px">Me - Interesting</p>
+      <div class="width" style="margin:10px"><hr class="neon"></div>
+      <div class="fixrating">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+      </div>
+      <p class="comment_text">first time to know EBgames belong to Gamestop</p>
+      <p class="timestamp" style="text-align:right">timestamp</p>
+      </div>
+
+    <form action="/html/tags/html_form_tag_action.cfm" method="post"> <!--https://www.quackit.com/html/codes/comment_box_code.cfm-->
+      <h2 class="neonText">Comments Here!</h2>
+      <div class="rating">
+        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+      </div>
+      <div>
+        <textarea name="comments" id="comments" style="width:96%;height:90px;padding:2%;font-size:1.2em;font-family:BB;">
+        </textarea>
+      </div>
+      <input type="submit" class="button2" value="Submit">
+    </form>
+    </div>
+  </div>
+      <p></p>
+    <footer>
+        <p>
+          &copy; 2021 Franky Jin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jint8@mcmaster.ca
+        </p>
+    </footer>
+  </div> <!-- background -->
+  </body>
+</html>

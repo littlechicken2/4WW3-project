@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>GamerFriend</title>
+    <link rel="stylesheet" href="project.css">
+  </head>
+  <img src="10.png" class="bg" alt="bg">
+    <div id="page-wrap">
+      <!-- Navbar -->
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="lii"><header class="neonText"> GamerFriend - The Ultimate Gameshop Finder</header></li>
+        <li class="ri"><button class="button2" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
+        <li class="ri"><button class="button2" onclick="document.getElementById('id02').style.display='block'">Submit Location</button></li>
+      </ul>
+
+          <div id="id01" class="modal"> <!-- start of login_tab -->
+            <form class="modal-content animate" action="/action_page.php" method="post">
+              <div class="container">
+                <label id="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+                <label id="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <button type="submit">Login</button>
+                <label>
+                  <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+              </div>
+
+              <div class="text" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+              </div>
+            </form>
+          </div>
+
+          <div id="id02" class="modal"> <!-- start of login_tab -->
+            <form class="modal-content animate" action="/action_page.php" method="post">
+              <div class="container">
+                <p style="font-size:30px">New Location</p>
+                <label id="locationname"><b>location Name</b></label>
+                <input type="text" placeholder="Enter location Name" name="locationname" required>
+                <label id="coordinate"><b>(Latitude,Longtitude)</b></label>
+                <input type="text" placeholder="Enter coordinate eg.(108.232,90.367)" name="coordinate">
+                <p>Describtion</p>
+                <textarea name="describtion" style="width:1000px; height:160px">
+                </textarea>
+                <button>upload picture or vedio</button>
+                <p></p>
+                <button type="submit">submit</button>
+
+              </div>
+            </form>
+          </div>
+
+          <script> // The script control login page
+          // Get the login_tab
+          var modal = document.getElementById('id01');
+          var modal2 = document.getElementById('id02');
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+              }
+              else if (event.target == modal2) {
+                  modal2.style.display = "none";
+              }
+          }
+          </script>
+
+      <p></p> <!-- add this for add spacing -->
+
+  <!-- NO CHANGE ABOVE -->
+
+    <div class = "neonbox">
+        <h1 class="neonText">
+              GamerFriend
+        </h1>
+        <h2 class="neonText">The Ultimate Gameshop Finder</h2>
+        <form role="search" id="form" class="form1">
+          <input type="search" id="query" name="q" class="input1"
+           placeholder="Gamgle"
+           aria-label="Search through site content">
+          <button class="button1 btn start"><span>Start</span></button>
+        </form>
+      <p></p>
+    </div>
+
+  </div> <!-- background -->
+  <footer>
+      <p>
+        &copy; 2021 Franky Jin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jint8@mcmaster.ca
+      </p>
+  </footer>
+  </body>
+</html>

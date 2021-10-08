@@ -1,0 +1,479 @@
+/*for neonText https://css-tricks.com/how-to-create-neon-text-with-css/*/
+
+.neonText {
+  color: #fff;
+  text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #ff0,
+      0 0 80px #ff0,
+      0 0 90px #ff0,
+      0 0 100px #ff0,
+      0 0 150px #ff0;
+}
+
+.whitetext {
+  color: #fff;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 40px #ff0,
+    0 0 100px #ff0;
+}
+
+@font-face { font-family: BB; src: url('Bender_Bold.otf'); }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 18px;
+  font-family: BB, sans-serif;
+  text-align:center;
+}
+
+h1, h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+/* Additional styling */
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+ font-size: 30px;
+}
+
+h3 {
+ font-size: 70px;
+}
+
+.neonbox {
+  border: 5px solid #fff;
+  border-radius: 2rem;
+  padding: 0 0 0 0;
+  box-shadow: 0 0 .2rem #fff,
+              0 0 .2rem #fff,
+              0 0 2rem #bc13fe,
+              0 0 0.8rem #bc13fe,
+              0 0 0.8rem #bc13fe,
+              inset 0 0 1.3rem #bc13fe;
+}
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+.column2 {
+  float: left;
+  width: 50%;
+  padding: 0 10px;
+}
+
+.img{
+    width:100%;
+    max-width:600px;
+}
+
+.row {margin: 0 -5px;background-color: transparent}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}/*https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_column_cards*/
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.width {
+  margin: auto;
+  width: 80%;
+}
+
+.card {
+  padding: 16px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn {
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    padding: 14px 28px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: BB, sans-serif;
+    font-size: 60px;
+    border: none;
+    overflow: hidden;
+    outline: none;
+}
+
+.start {color: #fff;
+        text-shadow:
+          0 0 4px #fff,
+          0 0 11px #fff,
+          0 0 19px #fff,
+          0 0 40px #ff0,
+          0 0 80px #ff0,
+          0 0 90px #ff0,
+          0 0 100px #ff0,
+          0 0 150px #ff0;
+}
+
+.btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.05s;
+}
+
+.btn:hover span {
+  padding-right: 60px;
+}
+
+.btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/*for the search bar*/
+
+.form1 {
+  background-color: transparent;
+  width: 1000px;
+  height: 100px;
+  border-radius: 50px;
+  border: 2px solid white;
+  align-items: center;
+  margin: auto;
+}
+
+.input1 {
+  all: unset;
+  font: 64px BB;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  padding: 6px 10px;
+}
+
+::placeholder {
+  color: #eee;
+  opacity: 0.7;
+}
+
+.button1 { /*start button*/
+  width: 350px;
+  height: 250px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, .5) ;
+}
+
+li {
+  float: left;
+}
+
+.lii{ /*for text*/
+  display: block;
+  float: left;
+  text-align: center;
+    padding: 20px 25px;
+}
+
+.ri {
+  float: right;
+}
+
+li a, .ri a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px 25px;
+  text-decoration: none;
+}
+
+.button2{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px 25px;
+  font-family: BB;
+  font-size : 18px;
+  background-color: #000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button.tab:hover {
+  opacity: 0.95;
+}
+
+button.Start:hover {
+  opacity: 0.95;
+}
+
+li a, li button:hover {
+  background-color: #111;
+}
+
+html {/*https://css-tricks.com/perfect-full-page-background-image/*/
+  background: url(10.png) no-repeat center center fixed;
+  background-size: cover;
+}
+
+.bg {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: repeat-y;
+  background-image: url('10.png');
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+}
+
+#page-wrap {
+  position: relative;
+  width: auto;
+  margin: auto;
+}
+
+input[type=text], input[type=password], input[type=coordinate] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  color: grey;
+}
+
+input[type=longtext] {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  color: grey;
+}
+
+
+
+button {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px 25px;
+  font-family: BB;
+  font-size : 18px;
+  text-decoration: none;
+  background-color: #000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button3 {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.tab{
+  background-color: transparent;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+/*https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal*/
+
+footer {
+    position:relative;
+    bottom:0;
+    justify-content: center;
+    padding: 5px;
+    background-color: #000;
+    color: #fff;
+}
+
+hr.neon {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); /*https://www.cssportal.com/blog/style-hr-tag-with-css/*/
+  border-top: 8px solid #fff;
+  border-radius: 5px;
+  color: #fff;
+  box-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #ff0,
+      0 0 80px #ff0,
+      0 0 90px #ff0,
+      0 0 100px #ff0,
+      0 0 150px #ff0;
+}
+
+.comment_text {
+  text-align: left;
+  color: white;
+  margin-left:50px;
+}
+
+.timestamp {
+  text-align: right;
+  font-size:5px;
+  color: white;
+  margin-right:50px;
+}
+
+.rating {
+  font-size: 50px;
+  color: #fff;
+  text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #ff0,
+      0 0 80px #ff0,
+      0 0 90px #ff0,
+      0 0 100px #ff0,
+      0 0 150px #ff0;
+}
+
+.rating > span:hover:before { /*https://css-tricks.com/star-ratings/*/
+   content: "\2605";
+   position: absolute;
+}
+
+.fixrating {
+  text-align: left;
+  margin-left: 50px;
+  color: #fff;
+  text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #ff0,
+      0 0 80px #ff0,
+      0 0 90px #ff0,
+      0 0 100px #ff0,
+      0 0 150px #ff0;
+}
