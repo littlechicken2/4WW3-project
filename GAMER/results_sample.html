@@ -1,129 +1,130 @@
 <!DOCTYPE HTML>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>GamerFriend</title>
-    <link rel="stylesheet" href="project.css">
-  </head>
-  <img src="10.png" class="bg" alt="bg">
-    <div id="page-wrap">
-      <!-- Navbar -->
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li class="lii"><header class="neonText"> GamerFriend - The Ultimate Gameshop Finder</header></li>
-        <li class="ri"><button class="button2" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
-        <li class="ri"><button class="button2" onclick="document.getElementById('id02').style.display='block'">Submit Location</button></li>
-      </ul>
+<head>
+  <meta charset="UTF-8">
+  <title>GamerFriend</title>
+  <link rel="stylesheet" href="project.css">
+</head>
+<img src="10.png" class="bg" alt="bg">
+<div id="page-wrap">
+  <!-- Navbar -->
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li class="lii"><header class="neonText"> GamerFriend - The Ultimate Gameshop Finder</header></li>
+    <li class="ri"><button class="button2" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
+    <li class="ri"><button class="button2" onclick="document.getElementById('id02').style.display='block'">Submit Location</button></li>
+  </ul>
 
-          <div id="id01" class="modal"> <!-- start of login_tab -->
-            <form class="modal-content animate" action="/action_page.php" method="post">
-              <div class="container">
-                <label id="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-                <label id="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-                <button type="submit">Login</button>
-                <label>
-                  <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-              </div>
+  <div id="id01" class="modal"> <!-- Login Popup -->
+    <form class="modal-content animate" action="/action_page.php" method="post">
+      <div class="container">
+        <label id="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+        <label id="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+        <button type="submit">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+      </div>
 
-              <div class="text" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
-              </div>
-            </form>
-          </div>
+      <div class="text" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <span class="psw"> <a href="#">Forgot password?</a></span>
+      </div>
+    </form>
+  </div>
 
-          <div id="id02" class="modal"> <!-- start of login_tab -->
-            <form class="modal-content animate" action="/action_page.php" method="post">
-              <div class="container">
-                <p style="font-size:30px">New Location</p>
-                <label id="locationname"><b>location Name</b></label>
-                <input type="text" placeholder="Enter location Name" name="locationname" required>
-                <label id="coordinate"><b>(Latitude,Longtitude)</b></label>
-                <input type="text" placeholder="Enter coordinate eg.(108.232,90.367)" name="coordinate">
-                <p>Describtion</p>
-                <textarea name="describtion" style="width:1000px; height:160px">
-                </textarea>
-                <button>upload picture or vedio</button>
-                <p></p>
-                <button type="submit">submit</button>
+  <div id="id02" class="modal"> <!-- Submit Location Popup -->
+    <form class="modal-content animate" action="/action_page.php" method="post">
+      <div class="container">
+        <p style="font-size:30px">New Location</p>
+        <label id="locationname"><b>Location Name</b></label>
+        <input type="text" placeholder="Enter location Name" name="locationname" required>
+        <label id="coordinate"><b>(Latitude,Longtitude)</b></label>
+        <input type="text" placeholder="Enter coordinate eg.(108.232,90.367)" name="coordinate">
+        <p>Description</p>
+        <textarea name="description" style="width:1000px; height:160px"></textarea>
+        <p></p>
+        <button>Upload a picture or video</button>
+        <p></p>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
 
-              </div>
-            </form>
-          </div>
+  <script> // The script control login page
+  // Get the login_tab
+  var modal = document.getElementById('id01');
+  var modal2 = document.getElementById('id02');
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+    else if (event.target == modal2) {
+      modal2.style.display = "none";
+    }
+  }
+  </script>
 
-          <script> // The script control login page
-          // Get the login_tab
-          var modal = document.getElementById('id01');
-          var modal2 = document.getElementById('id02');
-          // When the user clicks anywhere outside of the modal, close it
-          window.onclick = function(event) {
-              if (event.target == modal) {
-                  modal.style.display = "none";
-              }
-              else if (event.target == modal2) {
-                  modal2.style.display = "none";
-              }
-          }
-          </script>
-
-      <p></p> <!-- add this for add spacing -->
+  <p></p> <!-- add this for add spacing -->
 
   <!-- NO CHANGE ABOVE -->
 
-    <h1 class = "neonText">Search results for: sample_result</h1>
-    <div class="row">
+  <h1 class = "neonText">Search results for: sample_result</h1>
+  <div class="row">
 
-      <div class = "column">
-        <a href="http://3.130.231.165/GAMER/individual_sample.html">
-          <div class = "neonbox card">
+    <div class = "column">
+      <a href="http://3.130.231.165/GAMER/individual_sample.html">
+        <div class = "neonbox card">
           <h2 class="neonText">EB games</h2>
+          <hr class="neon">
           <img src="r1.jpg" style="width:100%" alt="shopimage">
           <p class="whitetext">2.2km <b>from you</b></p>
           <p class="whitetext"><b>Address: </b>University Plaza, 101 Osler Dr Unit 134B, Dundas, ON L9H 4H4</p>
-          </div>
-        </a>
-      </div>
+        </div>
+      </a>
+    </div>
 
-      <div class = "column">
-        <a href="http://3.130.231.165/GAMER/individual_sample.html">
-          <div class = "neonbox card">
+    <div class = "column">
+      <a href="http://3.130.231.165/GAMER/individual_sample.html">
+        <div class = "neonbox card">
           <h2 class="neonText">Gamestop</h2>
+          <hr class="neon">
           <img src="r2.jpg" style="width:100%" alt="shopimage">
           <p class="whitetext">0km <b>from you</b></p>
           <p class="whitetext"><b>Address: </b>All over America</p>
-          </div>
-        </a>
-      </div>
+        </div>
+      </a>
+    </div>
 
-      <div class = "column">
-        <a href="http://3.130.231.165/GAMER/individual_sample.html">
-          <div class = "neonbox card">
+    <div class = "column">
+      <a href="http://3.130.231.165/GAMER/individual_sample.html">
+        <div class = "neonbox card">
           <h2 class="neonText">Playstation</h2>
+          <hr class="neon">
           <img src="r3.jpg" style="width:100%" alt="shopimage">
           <p class="whitetext">-0.1km <b>from you</b></p>
           <p class="whitetext"><b>Address: </b>Somewhere Tokyo</p>
-          </div>
-        </a>
-      </div>
+        </div>
+      </a>
+    </div>
 
-
-      <div class = "column">
+    <div class = "column">
+        <div class="neonbox card">
         <p class="neonText">MAP</p>
         <hr class="neon">
         <img src="l1.png" class="img" alt="location">
       </div>
-
     </div>
-    <footer>
-        <p>
-          &copy; 2021 Franky Jin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jint8@mcmaster.ca
-        </p>
-    </footer>
-  </div> <!-- background -->
+  </div>
 
-<!-- NO CHANGE BELOW -->
-  </body>
+  <footer style="position:fixed;bottom:0;width:100%;">
+    <p>
+      &copy; 2021 Franky Jin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jint8@mcmaster.ca&nbsp;&nbsp;|&nbsp;&nbsp;Andy Ng&nbsp;&nbsp;&nbsp;&nbsp;nga15@mcmaster.ca
+    </p>
+  </footer>
+</div> <!-- background -->
+</body>
 </html>
