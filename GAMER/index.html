@@ -14,8 +14,9 @@
         <li class="ri"><button class="button2" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
         <li class="ri"><button class="button2" onclick="document.getElementById('id02').style.display='block'">Submit Location</button></li>
       </ul>
-
-          <div id="id01" class="modal"> <!-- start of login_tab -->
+          
+          <!-- Login Popup -->
+          <div id="id01" class="modal">
             <form class="modal-content animate" action="/action_page.php" method="post">
               <div class="container">
                 <label id="uname"><b>Username</b></label>
@@ -30,7 +31,7 @@
 
               <div class="text" style="background-color:#f1f1f1">
                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
+                <span class="psw"> <a href="#">Forgot password?</a></span>
               </div>
             </form>
           </div>
