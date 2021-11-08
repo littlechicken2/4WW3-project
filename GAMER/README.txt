@@ -1,4 +1,5 @@
 JIN TIAN 400123120 jint8
+ANDY NG 400119512 nga15
 http://3.130.231.165/GAMER/index.html
 http://3.130.231.165/GAMER/results_sample.html
 http://3.130.231.165/GAMER/individual_sample.html
