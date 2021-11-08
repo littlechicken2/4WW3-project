@@ -93,7 +93,8 @@
       <!-- Left Column -->
       <div class="column2">
         <h2 class="neonText">LOCATION ON MAP</h2>
-        <img src="l1.png" class="img" alt="location">
+        <!--<div> that our map will be loaded into -->
+        <div id="map"></div>
         <p class="neonText">Additional Information</p>
         <iframe width="420" height="315"
         src="https://www.youtube.com/embed/GbahxwcI11Y?autoplay=1&mute=1">
@@ -110,6 +111,38 @@
       </div>
     </div>
     <p></p>
+
+    <script>
+    // create the map and load it into the div with id="mymap"
+    var map = L.map('map').setView([43.263,-79.919], 15);
+    
+    // use the OpenStreetMapstiles
+    L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+    }
+    ).addTo(map);
+
+    map.setView([43.258007,-79.942983], 16);
+
+    L.marker([43.258007, -79.942983])
+     .addTo(map)
+     .bindPopup("<b><a href='http://www.ebgames.ca'>EB Games</a></b> at University Plaza, 101 Osler Dr. Unit 134B")
+     .openPopup();
+
+    // create a blank pop-up for later use
+    /*
+    var popup = L.popup();
+    // display a popup when the user clicks on the map
+    function onMapClick(e) {
+    popup.setLatLng(e.latlng)
+     .setContent("You clicked the map at " + e.latlng.toString())
+     .openOn(map);
+    }
+    map.on('click', onMapClick);
+    */
+    </script>
 
     <!-- Comments Area -->
     <div class="comment_area">
