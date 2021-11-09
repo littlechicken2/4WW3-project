@@ -94,8 +94,32 @@
         placeholder="Gamgle"
         aria-label="Search through site content">
       </form>
-      <button class="button1 btn start" type="submit"><span>Start</span></button>
+      <button class="button1 btn start" type="submit" onclick="location.href='http://3.130.231.165/GAMER/results_sample.html';"><span>Search</span></button>
+      <button class="button1 btn start" type="submit" onclick="getLocation()"><span>Search nearby</span></button>
     </div>
+    <p id="demo"></p>
+    <script>
+      var x = document.getElementById("demo");
+   
+       function getLocation() {
+         if (navigator.geolocation) {
+          setTimeout(function(){
+            window.location.href = 'results_sample.html'; // wait for user allow get location  
+         }, 3000)
+           navigator.geolocation.getCurrentPosition(showPosition);
+
+         } else { 
+           x.innerHTML = "Geolocation is not supported by this browser.";
+         }
+       }
+       
+       function showPosition(position) {
+         x.innerHTML = "Latitude: " + position.coords.latitude + 
+         "<br>Longitude: " + position.coords.longitude;
+         localStorage.setItem("latitude",position.coords.latitude);
+         localStorage.setItem("longtitude",position.coords.longitude);
+         //window.onload = alert(localStorage.getItem("latitude"));
+       }  //https://www.w3schools.com/html/html5_geolocation.asp</script>
 
 
     <!--<div> that our map will be loaded into -->

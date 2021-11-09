@@ -124,17 +124,26 @@
 
   <script>
     // create the map and load it into the div with id="mymap"
-    var map = L.map('map').setView([43.263,-79.919], 15);
+    window.onload = alert(localStorage.getItem("latitude"));
+    if (localStorage.getItem("latitude") && localStorage.getItem("longtitude")) {
+      var map = L.map('map').setView([localStorage.getItem("latitude"),localStorage.getItem("longtitude")], 15);
+      L.marker([localStorage.getItem("latitude"),localStorage.getItem("longtitude")])
+      .addTo(map)
+      .bindPopup("Your Location")
+      .openPopup();
+    }
+    else{
+      var map = L.map('map').setView([43.263,-79.919], 15);
+      //[43.2602836,-79.9646182] // [43.263,-79.919]
+    }
     
     // use the OpenStreetMapstiles
-    L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-    }
-    ).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+    }).addTo(map);
+    
+    //map.setView([43.263,-79.919], 14);
 
-    map.setView([43.263,-79.919], 14);
 
     L.marker([43.258007, -79.942983])
      .addTo(map)
@@ -145,6 +154,9 @@
      .addTo(map)
      .bindPopup("<b><a href='http://www.ebgames.ca'>EB Games</a></b> at Westdale, 878 King Street West")
      .openPopup();
+    
+    localStorage.clear();
+
 
     // create a blank pop-up for later use
     /*

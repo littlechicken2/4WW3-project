@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to get your coordinates.</p>
+
+<script>
+navigator.geolocation.getCurrentPosition(showPosition);
+
+function showPosition(position) {
+  localStorage.setItem("latitude",position.coords.latitude);
+  localStorage.setItem("longtitude",position.coords.longitude); 
+} 
+
+setTimeout(function(){
+  window.onload = alert(localStorage.getItem("longtitude"));
+}, 2000)
+
+</script>
+
+</body>
+</html>
