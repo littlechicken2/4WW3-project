@@ -77,9 +77,6 @@
     }
     </script>
 
-
-
-
     <p></p> <!-- add this for add spacing -->
 
     <!-- NO CHANGE ABOVE -->
@@ -95,49 +92,8 @@
         aria-label="Search through site content">
       </form>
       <button class="button1 btn start" type="submit" onclick="location.href='http://3.130.231.165/GAMER/results_sample.html';"><span>Search</span></button>
-      <button class="button1 btn start" type="submit" onclick="getLocation()"><span>Search nearby</span></button>
+      <button class="button1 btn start" type="submit" onclick="location.href='http://3.130.231.165/GAMER/results_sample.html';"><span>Search nearby</span></button>
     </div>
-    <p id="demo"></p>
-    <script>
-      var x = document.getElementById("demo");
-   
-       function getLocation() {
-         if (navigator.geolocation) {
-          setTimeout(function(){
-            window.location.href = 'results_sample.html'; // wait for user allow get location  
-         }, 3000)
-           navigator.geolocation.getCurrentPosition(showPosition);
-
-         } else { 
-           x.innerHTML = "Geolocation is not supported by this browser.";
-         }
-       }
-       
-       function showPosition(position) {
-         x.innerHTML = "Latitude: " + position.coords.latitude + 
-         "<br>Longitude: " + position.coords.longitude;
-         localStorage.setItem("latitude",position.coords.latitude);
-         localStorage.setItem("longtitude",position.coords.longitude);
-         //window.onload = alert(localStorage.getItem("latitude"));
-       }  //https://www.w3schools.com/html/html5_geolocation.asp</script>
-
-
-    <!--<div> that our map will be loaded into -->
-    <div id="map"></div>
-
-    <script>
-    // create the map and load it into the div with id="mymap"
-    var map= L.map('map').setView([43.263,-79.919], 15);
-
-    // use the OpenStreetMapstiles
-    L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-    }
-    ).addTo(map);
-
-    </script>
 
     <p></p>
     <footer style="position:fixed;bottom:0;width:100%;">
