@@ -32,6 +32,14 @@
       }
     }
     </script>
+      <style>
+        #lmap{
+          margin-left: auto;
+          margin-right: auto;
+          height: 300px;
+          width: 70%;
+        }
+        </style>
 </head>
 
 <body>
@@ -75,6 +83,25 @@
           <label id="coordinate"><b>(Latitude,Longtitude)</b></label>
           <input type="number" placeholder="Enter coordinate latitude" name="latitude" required min="-90" max="90" step="0.001">
           <input type="number" placeholder="Enter coordinate longtitude" name="longtitude" required min="-180" max="180" step="0.001">
+          <div id="lmap"></div>
+          <script>
+            var lmap = L.map('lmap').setView([43.263,-79.919], 15);
+            L.tileLayer(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+              attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+            }
+            ).addTo(lmap);
+        
+            var popup = L.popup();
+            // display a popup when the user clicks on the map
+            function onMapClick(e) {
+            popup.setLatLng(e.latlng)
+             .setContent("You clicked the map at " + e.latlng.toString())
+             .openOn(lmap);
+            }
+            lmap.on('click', onMapClick);
+            
+            </script>
           <p>Description</p>
           <textarea name="description" style="width:1000px; height:160px"></textarea>
           <p></p>
