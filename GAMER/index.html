@@ -10,6 +10,28 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
+   <script>
+    function validateForm() {
+      let x = document.forms["login"]["uname"].value;  //the html5 types are so much better
+      let y = document.forms["login"]["psw"].value;
+      if (x == "") {
+        alert("Enter Name");
+        return false;
+      }
+      if(y == "") {   //https://www.javatpoint.com/confirm-password-validation-in-javascript
+        alert("Enter Password");
+        return false;  
+      }  
+      if(y.length < 8) {  
+        alert("Password length must be atleast 8 characters");
+        return false;  
+      }  
+      if(y.length > 15) {  
+        alert("Password length must not exceed 15 characters");
+        return false;  
+      }
+    }
+    </script>
 </head>
 
 <body>
@@ -25,13 +47,13 @@
     </ul>
 
     <div id="id01" class="modal"> <!-- Login Popup -->
-      <form class="modal-content animate" action="/action_page.php" method="post">
+      <form class="modal-content animate"  method="post" name="login" onsubmit ="return validateForm()"> <!--action="/action_page.php"-->
         <div class="container">
           <label id="uname"><b>Username</b></label>
-          <input type="text" placeholder="Enter Username" name="uname" required>
+          <input type="text" placeholder="Enter Username" name="uname">
           <label id="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required>
-          <button type="submit">Login</button>
+          <input type="password" placeholder="Enter Password" name="psw">
+          <button type="submit">Login/register</button>
           <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
           </label>
@@ -45,13 +67,14 @@
     </div>
 
     <div id="id02" class="modal"> <!-- Submit Location Popup -->
-      <form class="modal-content animate" action="/action_page.php" method="post">
+      <form class="modal-content animate" method="post">
         <div class="container">
           <p style="font-size:30px">New Location</p>
           <label id="locationname"><b>Location Name</b></label>
           <input type="text" placeholder="Enter location Name" name="locationname" required>
           <label id="coordinate"><b>(Latitude,Longtitude)</b></label>
-          <input type="text" placeholder="Enter coordinate eg.(108.232,90.367)" name="coordinate">
+          <input type="number" placeholder="Enter coordinate latitude" name="latitude" required min="-90" max="90" step="0.001">
+          <input type="number" placeholder="Enter coordinate longtitude" name="longtitude" required min="-180" max="180" step="0.001">
           <p>Description</p>
           <textarea name="description" style="width:1000px; height:160px"></textarea>
           <p></p>
