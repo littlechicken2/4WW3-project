@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>
+   <link
+   rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+ />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
@@ -49,9 +53,9 @@
     <!-- Navbar -->
     <ul>
       <li><a href="index.html">Home</a></li>
-      <li class="lii"><header class="neonText"> GamerFriend - The Ultimate Gameshop Finder</header></li>
-      <li class="ri"><button class="button2" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
-      <li class="ri"><button class="button2" onclick="document.getElementById('id02').style.display='block'">Submit Location</button></li>
+      <li class="lii"><header class="neonText animate__animated animate__fadeIn animate__delay-2s"> GamerFriend - The Ultimate Gameshop Finder</header></li>
+      <li class="ri"><button class="button2 animate__animated animate__fadeIn animate__delay-2s" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
+      <li class="ri"><button class="button2 animate__animated animate__fadeIn animate__delay-2s" onclick="document.getElementById('id02').style.display='block'">Submit Location</button></li>
     </ul>
 
     <div id="id01" class="modal"> <!-- Login Popup -->
@@ -132,21 +136,21 @@
     <!-- NO CHANGE ABOVE -->
 
     <div class = "neonbox">
-      <h1 class="neonText">
+      <h1 class="neonText animate__animated animate__backInDown">
         GamerFriend
       </h1>
-      <h2 class="neonText">The Ultimate Gameshop Finder</h2>
-      <form role="search" id="form" class="form1">
+      <h2 class="neonText animate__animated animate__backInDown animate__delay-1s">The Ultimate Gameshop Finder</h2>
+      <form role="search" id="form" class="form1 animate__animated animate__zoomInDown animate__delay-3s">
         <input type="search" id="query" name="q" class="input1"
         placeholder="Gamgle"
         aria-label="Search through site content">
       </form>
-      <button class="button1 btn start" type="submit" onclick="location.href='http://3.130.231.165/GAMER/results_sample.html';"><span>Search</span></button>
-      <button class="button1 btn start" type="submit" onclick="location.href='http://3.130.231.165/GAMER/results_sample.html';"><span>Search nearby</span></button>
+      <button class="button1 btn start animate__animated animate__bounceInLeft animate__delay-2s" type="submit" onclick="location.href='http://3.130.231.165/GAMER/results_sample.html';"><span>Search</span></button>
+      <button class="button1 btn start animate__animated animate__bounceInRight animate__delay-2s" type="submit" onclick="location.href='http://3.130.231.165/GAMER/results_sample.html';"><span>Search nearby</span></button>
     </div>
 
     <p></p>
-    <footer style="position:fixed;bottom:0;width:100%;">
+    <footer style="position:fixed;bottom:0;width:100%;" class="animate__animated animate__fadeInUp">
       <p>
         &copy; 2021 Franky Jin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jint8@mcmaster.ca&nbsp;&nbsp;|&nbsp;&nbsp;Andy Ng&nbsp;&nbsp;&nbsp;&nbsp;nga15@mcmaster.ca
       </p>

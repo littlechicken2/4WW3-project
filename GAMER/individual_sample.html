@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>
+   <link
+   rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+ />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
@@ -15,6 +19,13 @@
     height: 500px;
     width: 100%;
   }
+  #lmap{
+          margin-left: auto;
+          margin-right: auto;
+          height: 300px;
+          width: 70%;
+        }
+        </style>
   </style>
      <script>
       function validateForm() {
@@ -39,73 +50,94 @@
       }
       </script>
 </head>
-<img src="10.png" class="bg" alt="bg">
-<div id="page-wrap">
-  <!-- Navbar -->
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li class="lii"><header class="neonText"> GamerFriend - The Ultimate Gameshop Finder</header></li>
-    <li class="ri"><button class="button2" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
-    <li class="ri"><button class="button2" onclick="document.getElementById('id02').style.display='block'">Submit Location</button></li>
-  </ul>
+<body>
 
-  <div id="id01" class="modal"> <!-- Login Popup -->
-    <form class="modal-content animate"  method="post" name="login" onsubmit ="return validateForm()"> <!--action="/action_page.php"-->
-      <div class="container">
-        <label id="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname">
-        <label id="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw">
-        <button type="submit">Login/register</button>
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
-      </div>
+  <img src="10.png" class="bg" alt="bg">
+  <div id="page-wrap">
+    <!-- Navbar -->
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li class="lii"><header class="neonText animate__animated animate__fadeIn "> GamerFriend - The Ultimate Gameshop Finder</header></li>
+      <li class="ri"><button class="button2 animate__animated animate__fadeIn " onclick="document.getElementById('id01').style.display='block'">Login</button></li>
+      <li class="ri"><button class="button2 animate__animated animate__fadeIn " onclick="document.getElementById('id02').style.display='block'">Submit Location</button></li>
+    </ul>
 
-      <div class="text" style="background-color:#f1f1f1">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <span class="psw"> <a href="#">Forgot password?</a></span>
-      </div>
-    </form>
-  </div>
+    <div id="id01" class="modal"> <!-- Login Popup -->
+      <form class="modal-content animate"  method="post" name="login" onsubmit ="return validateForm()"> <!--action="/action_page.php"-->
+        <div class="container">
+          <label id="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname">
+          <label id="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw">
+          <button type="submit">Login/register</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+        </div>
 
-  <div id="id02" class="modal"> <!-- Submit Location Popup -->
-    <form class="modal-content animate" method="post">
-      <div class="container">
-        <p style="font-size:30px">New Location</p>
-        <label id="locationname"><b>Location Name</b></label>
-        <input type="text" placeholder="Enter location Name" name="locationname" required>
-        <label id="coordinate"><b>(Latitude,Longtitude)</b></label>
-        <input type="number" placeholder="Enter coordinate latitude" name="latitude" required min="-90" max="90" step="0.001">
-        <input type="number" placeholder="Enter coordinate longtitude" name="longtitude" required min="-180" max="180" step="0.001">
-        <p>Description</p>
-        <textarea name="description" style="width:1000px; height:160px"></textarea>
-        <p></p>
-        <button>Upload a picture or video</button>
-        <p></p>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
-  </div>
+        <div class="text" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+          <span class="psw"> <a href="#">Forgot password?</a></span>
+        </div>
+      </form>
+    </div>
 
-  <script> // The script control login page
-  // Get the login_tab
-  var modal = document.getElementById('id01');
-  var modal2 = document.getElementById('id02');
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
+    <div id="id02" class="modal"> <!-- Submit Location Popup -->
+      <form class="modal-content animate" method="post">
+        <div class="container">
+          <p style="font-size:30px">New Location</p>
+          <label id="locationname"><b>Location Name</b></label>
+          <input type="text" placeholder="Enter location Name" name="locationname" required>
+          <label id="coordinate"><b>(Latitude,Longtitude)</b></label>
+          <input type="number" placeholder="Enter coordinate latitude" name="latitude" required min="-90" max="90" step="0.001">
+          <input type="number" placeholder="Enter coordinate longtitude" name="longtitude" required min="-180" max="180" step="0.001">
+          <div id="lmap"></div>
+          <script>
+            var lmap = L.map('lmap').setView([43.263,-79.919], 15);
+            L.tileLayer(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+              attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+            }
+            ).addTo(lmap);
+        
+            var popup = L.popup();
+            // display a popup when the user clicks on the map
+            function onMapClick(e) {
+            popup.setLatLng(e.latlng)
+             .setContent("You clicked the map at " + e.latlng.toString())
+             .openOn(lmap);
+            }
+            lmap.on('click', onMapClick);
+            
+            </script>
+          <p>Description</p>
+          <textarea name="description" style="width:1000px; height:160px"></textarea>
+          <p></p>
+          <button>Upload a picture or video</button>
+          <p></p>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <script> // The script control login page
+    // Get the login_tab
+    var modal = document.getElementById('id01');
+    var modal2 = document.getElementById('id02');
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+      else if (event.target == modal2) {
+        modal2.style.display = "none";
+      }
     }
-    else if (event.target == modal2) {
-      modal2.style.display = "none";
-    }
-  }
-  </script>
+    </script>
 
-  <p></p> <!-- add this for add spacing -->
+    <p></p> <!-- add this for add spacing -->
 
-  !-- NO CHANGE ABOVE -->
+    <!-- NO CHANGE ABOVE -->
 
   <!-- Header -->
   <div class="width">
