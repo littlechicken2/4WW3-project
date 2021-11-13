@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <title>GamerFriend</title>
   <link rel="stylesheet" href="project.css">
+  <!-- Leaflet API -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
+  <!-- Animation Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <!-- Initiate Map Size and Styling for Footer - https://matthewjamestaylor.com/bottom-footer -->
   <style>
     #map{
       height: 500px;
@@ -27,9 +31,11 @@
        position:absolute;
        bottom:0;
        width:100%;
-       height:60px;   /* Height of the footer */
+       height:60px;
     }
   </style>
+
+  <!-- Validate Form Script -->
   <script>
     function validateForm() {
       let x = document.forms["login"]["uname"].value;  //the html5 types are so much better
@@ -57,7 +63,7 @@
 <body>
   <img src="10.png" class="bg" alt="bg">
   <div id="container">
-    <!-- Navbar Start -->
+    <!-- NavBar Start -->
     <ul>
       <li><a href="http://3.130.231.165/GAMER/index.html">Home</a></li>
       <li class="lii"><header class="neonText animate__animated animate__fadeIn animate__delay-2s"> GamerFriend - The Ultimate Gameshop Finder</header></li>
@@ -86,7 +92,8 @@
       </form>
     </div>
 
-    <script> // The script control login page
+    <!-- Script to Exit Login Popup -->
+    <script>
     // Get the login_tab
     var modal = document.getElementById('id01');
     var modal2 = document.getElementById('id02');
@@ -110,8 +117,9 @@
       <h1 class = "neonText">EBGAMES</h1>
       <hr class="neon">
       <div class="row">
+      <p></p>
 
-        <!-- Left Column -->
+        <!-- Location Details -->
         <div class="column2">
           <div class = "neonbox card">
             <h2 class="neonText">EB GAMES</h2>
@@ -122,15 +130,16 @@
           </div>
         </div>
 
-        <!-- Right Column -->
+        
         <div class="column2">
+          <!-- Location on Map -->
           <div class = "neonbox card">
             <h2 class="neonText">LOCATION ON MAP</h2>
             <hr class="neon">
             <!--<div> that our map will be loaded into -->
             <div id="map"></div>
           </div>
-
+          <!-- Additional Details -->
           <div class = "neonbox card">
             <p class="neonText">Additional Information</p>
             <hr class="neon">
@@ -143,12 +152,13 @@
       <p></p>
 
       <script>
-      // create the map and load it into the div with id="mymap"
+      // Initialize Map and OpenStreetMap Tile Layer
       var map = L.map('map').setView([43.258007,-79.942983], 15);
       L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
       }).addTo(map);
 
+      // Create a marker at Location
       L.marker([43.258007, -79.942983])
        .addTo(map)
        .bindPopup("<b><a href='http://www.ebgames.ca'>EB Games</a></b> at University Plaza, 101 Osler Dr. Unit 134B")
@@ -193,6 +203,7 @@
 
     <p>-</p>
 
+    <!-- Footer -->
     <footer id="footer" class="animate__animated animate__fadeInUp">
       <p>
         &copy; 2021 Franky Jin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jint8@mcmaster.ca&nbsp;&nbsp;|&nbsp;&nbsp;Andy Ng&nbsp;&nbsp;&nbsp;&nbsp;nga15@mcmaster.ca
