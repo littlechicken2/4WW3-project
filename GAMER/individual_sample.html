@@ -7,62 +7,66 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>
-   <link
-   rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
- />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
-  #map{
-    height: 500px;
-    width: 100%;
-  }
-  #lmap{
-          margin-left: auto;
-          margin-right: auto;
-          height: 300px;
-          width: 70%;
-        }
-        </style>
+    #map{
+      height: 500px;
+      width: 100%;
+    }
+    html,body {
+       height:100%;
+    }
+    #container {
+       min-height:100%;
+       position:relative;
+    }
+    #footer {
+       position:absolute;
+       bottom:0;
+       width:100%;
+       height:60px;   /* Height of the footer */
+    }
   </style>
-     <script>
-      function validateForm() {
-        let x = document.forms["login"]["uname"].value;  //the html5 types are so much better
-        let y = document.forms["login"]["psw"].value;
-        if (x == "") {
-          alert("Enter Name");
-          return false;
-        }
-        if(y == "") {   //https://www.javatpoint.com/confirm-password-validation-in-javascript
-          alert("Enter Password");
-          return false;  
-        }  
-        if(y.length < 8) {  
-          alert("Password length must be atleast 8 characters");
-          return false;  
-        }  
-        if(y.length > 15) {  
-          alert("Password length must not exceed 15 characters");
-          return false;  
-        }
+  <script>
+    function validateForm() {
+      let x = document.forms["login"]["uname"].value;  //the html5 types are so much better
+      let y = document.forms["login"]["psw"].value;
+      if (x == "") {
+        alert("Enter Name");
+        return false;
       }
-      </script>
+      if(y == "") {   //https://www.javatpoint.com/confirm-password-validation-in-javascript
+        alert("Enter Password");
+        return false;  
+      }  
+      if(y.length < 8) {  
+        alert("Password length must be atleast 8 characters");
+        return false;  
+      }  
+      if(y.length > 15) {  
+        alert("Password length must not exceed 15 characters");
+        return false;  
+      }
+    }
+  </script>
 </head>
+
 <body>
-
   <img src="10.png" class="bg" alt="bg">
-  <div id="page-wrap">
-    <!-- Navbar -->
+  <div id="container">
+    <!-- Navbar Start -->
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li class="lii"><header class="neonText animate__animated animate__fadeIn "> GamerFriend - The Ultimate Gameshop Finder</header></li>
-      <li class="ri"><button class="button2 animate__animated animate__fadeIn " onclick="document.getElementById('id01').style.display='block'">Login</button></li>
-      <li class="ri"><button class="button2 animate__animated animate__fadeIn " onclick="document.getElementById('id02').style.display='block'">Submit Location</button></li>
+      <li><a href="http://3.130.231.165/GAMER/index.html">Home</a></li>
+      <li class="lii"><header class="neonText animate__animated animate__fadeIn animate__delay-2s"> GamerFriend - The Ultimate Gameshop Finder</header></li>
+      <li class="ri"><button class="button2 animate__animated animate__fadeIn animate__delay-2s" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
+      <li class="ri"><button class="button2 animate__animated animate__fadeIn animate__delay-2s" onclick="location.href='http://3.130.231.165/GAMER/submit_location.html'">Submit Location</button></li>
     </ul>
-
-    <div id="id01" class="modal"> <!-- Login Popup -->
+    
+    <!-- Login Popup -->
+    <div id="id01" class="modal"> 
       <form class="modal-content animate"  method="post" name="login" onsubmit ="return validateForm()"> <!--action="/action_page.php"-->
         <div class="container">
           <label id="uname"><b>Username</b></label>
@@ -78,44 +82,6 @@
         <div class="text" style="background-color:#f1f1f1">
           <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
           <span class="psw"> <a href="#">Forgot password?</a></span>
-        </div>
-      </form>
-    </div>
-
-    <div id="id02" class="modal"> <!-- Submit Location Popup -->
-      <form class="modal-content animate" method="post">
-        <div class="container">
-          <p style="font-size:30px">New Location</p>
-          <label id="locationname"><b>Location Name</b></label>
-          <input type="text" placeholder="Enter location Name" name="locationname" required>
-          <label id="coordinate"><b>(Latitude,Longtitude)</b></label>
-          <input type="number" placeholder="Enter coordinate latitude" name="latitude" required min="-90" max="90" step="0.001">
-          <input type="number" placeholder="Enter coordinate longtitude" name="longtitude" required min="-180" max="180" step="0.001">
-          <div id="lmap"></div>
-          <script>
-            var lmap = L.map('lmap').setView([43.263,-79.919], 15);
-            L.tileLayer(
-            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-              attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-            }
-            ).addTo(lmap);
-        
-            var popup = L.popup();
-            // display a popup when the user clicks on the map
-            function onMapClick(e) {
-            popup.setLatLng(e.latlng)
-             .setContent("You clicked the map at " + e.latlng.toString())
-             .openOn(lmap);
-            }
-            lmap.on('click', onMapClick);
-            
-            </script>
-          <p>Description</p>
-          <textarea name="description" style="width:1000px; height:160px"></textarea>
-          <p></p>
-          <button>Upload a picture or video</button>
-          <p></p>
-          <button type="submit">Submit</button>
         </div>
       </form>
     </div>
@@ -137,109 +103,101 @@
 
     <p></p> <!-- add this for add spacing -->
 
-    <!-- NO CHANGE ABOVE -->
+    <!-- NavBar End -->
 
-  <!-- Header -->
-  <div class="width">
-    <h1 class = "neonText">EBGAMES</h1>
-    <hr class="neon">
-    <div class="row">
+    <!-- Header -->
+    <div class="width">
+      <h1 class = "neonText">EBGAMES</h1>
+      <hr class="neon">
+      <div class="row">
 
-      <!-- Left Column -->
-      <div class="column2">
-        <h2 class="neonText">LOCATION ON MAP</h2>
-        <!--<div> that our map will be loaded into -->
-        <div id="map"></div>
-        <p class="neonText">Additional Information</p>
-        <iframe width="420" height="315"
-        src="https://www.youtube.com/embed/GbahxwcI11Y?autoplay=1&mute=1">
-        </iframe>
-      </div>
-      <!-- Right Column -->
-      <div class="column2">
-        <div class = "neonbox card">
-        <h2 class="neonText">EB GAMES</h2>
-        <img src="r1.jpg" style="width:100%" alt="shopimage">
-        <p class="whitetext">2.2km <b>from you</b></p>
-        <p class="whitetext"><b>Address: </b>University Plaza, 101 Osler Dr Unit 134B, Dundas, ON L9H 4H4</p>
+        <!-- Left Column -->
+        <div class="column2">
+          <div class = "neonbox card">
+            <h2 class="neonText">EB GAMES</h2>
+            <hr class="neon">
+            <img src="r1.jpg" style="width:100%" alt="shopimage">
+            <p class="whitetext">2.2km <b>from you</b></p>
+            <p class="whitetext"><b>Address: </b>University Plaza, 101 Osler Dr Unit 134B, Dundas, ON L9H 4H4</p>
+          </div>
         </div>
-      </div>
-    </div>
-    <p></p>
 
-    <script>
-    // create the map and load it into the div with id="mymap"
-    var map = L.map('map').setView([43.263,-79.919], 15);
-    
-    // use the OpenStreetMapstiles
-    L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-    }
-    ).addTo(map);
+        <!-- Right Column -->
+        <div class="column2">
+          <div class = "neonbox card">
+            <h2 class="neonText">LOCATION ON MAP</h2>
+            <hr class="neon">
+            <!--<div> that our map will be loaded into -->
+            <div id="map"></div>
+          </div>
 
-    map.setView([43.258007,-79.942983], 16);
-
-    L.marker([43.258007, -79.942983])
-     .addTo(map)
-     .bindPopup("<b><a href='http://www.ebgames.ca'>EB Games</a></b> at University Plaza, 101 Osler Dr. Unit 134B")
-     .openPopup();
-
-    // create a blank pop-up for later use
-    /*
-    var popup = L.popup();
-    // display a popup when the user clicks on the map
-    function onMapClick(e) {
-    popup.setLatLng(e.latlng)
-     .setContent("You clicked the map at " + e.latlng.toString())
-     .openOn(map);
-    }
-    map.on('click', onMapClick);
-    */
-    </script>
-
-    <!-- Comments Area -->
-    <div class="comment_area">
-      <div class="neonbox">
-        <p class="neonText" style="text-align:left;margin-left:30px">Sample user - Sample title</p>
-        <div class="width" style="margin:10px"><hr class="neon"></div>
-        <div class="fixrating">
-          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          <div class = "neonbox card">
+            <p class="neonText">Additional Information</p>
+            <hr class="neon">
+            <iframe width="420" height="315"
+            src="https://www.youtube.com/embed/GbahxwcI11Y?autoplay=1&mute=1">
+            </iframe>
+          </div>
         </div>
-        <p class="comment_text">yo this shop is da best!</p>
-        <p class="timestamp" style="text-align:right">timestamp</p>
       </div>
       <p></p>
-      <div class="neonbox">
-        <p class="neonText" style="text-align:left;margin-left:30px">Me - Interesting</p>
-        <div class="width" style="margin:10px"><hr class="neon"></div>
-        <div class="fixrating">
-          <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
-        </div>
-        <p class="comment_text">first time to know EBgames belong to Gamestop</p>
-        <p class="timestamp" style="text-align:right">timestamp</p>
-      </div>
 
-      <form action="/html/tags/html_form_tag_action.cfm" method="post"> <!--https://www.quackit.com/html/codes/comment_box_code.cfm-->
-        <h2 class="neonText">Comments Here!</h2>
-        <div class="rating">
-          <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+      <script>
+      // create the map and load it into the div with id="mymap"
+      var map = L.map('map').setView([43.258007,-79.942983], 15);
+      L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+      }).addTo(map);
+
+      L.marker([43.258007, -79.942983])
+       .addTo(map)
+       .bindPopup("<b><a href='http://www.ebgames.ca'>EB Games</a></b> at University Plaza, 101 Osler Dr. Unit 134B")
+       .openPopup();
+      </script>
+
+      <!-- Comments Area -->
+      <div class="comment_area">
+        <div class="neonbox">
+          <p class="neonText" style="text-align:left;margin-left:30px">Sample user - Sample title</p>
+          <div class="width" style="margin:10px"><hr class="neon"></div>
+          <div class="fixrating">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="comment_text">yo this shop is da best!</p>
+          <p class="timestamp" style="text-align:right">timestamp</p>
         </div>
-        <div>
-          <textarea name="comments" id="comments" style="width:96%;height:90px;padding:2%;font-size:1.2em;font-family:BB;">
-          </textarea>
+        <p></p>
+        <div class="neonbox">
+          <p class="neonText" style="text-align:left;margin-left:30px">Me - Interesting</p>
+          <div class="width" style="margin:10px"><hr class="neon"></div>
+          <div class="fixrating">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+          </div>
+          <p class="comment_text">first time to know EBgames belong to Gamestop</p>
+          <p class="timestamp" style="text-align:right">timestamp</p>
         </div>
-        <input type="submit" class="button2" value="Submit">
-      </form>
+
+        <form action="/html/tags/html_form_tag_action.cfm" method="post"> <!--https://www.quackit.com/html/codes/comment_box_code.cfm-->
+          <h2 class="neonText">Comments Here!</h2>
+          <div class="rating">
+            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+          </div>
+          <div>
+            <textarea name="comments" id="comments" style="width:96%;height:90px;padding:2%;font-size:1.2em;font-family:BB;">
+            </textarea>
+          </div>
+          <input type="submit" class="button2" value="Submit">
+        </form>
+      </div>
     </div>
-  </div>
-  <p></p>
-  <footer style="position:fixed;bottom:0;width:100%;">
-    <p>
-      &copy; 2021 Franky Jin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jint8@mcmaster.ca&nbsp;&nbsp;|&nbsp;&nbsp;Andy Ng&nbsp;&nbsp;&nbsp;&nbsp;nga15@mcmaster.ca
-    </p>
-  </footer>
-</div> <!-- background -->
+
+    <p>-</p>
+
+    <footer id="footer" class="animate__animated animate__fadeInUp">
+      <p>
+        &copy; 2021 Franky Jin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jint8@mcmaster.ca&nbsp;&nbsp;|&nbsp;&nbsp;Andy Ng&nbsp;&nbsp;&nbsp;&nbsp;nga15@mcmaster.ca
+      </p>
+    </footer>
+  </div> <!-- background -->
 </body>
 </html>
