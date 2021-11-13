@@ -17,6 +17,9 @@ iii blurry.
 
 Part 2:
 
+Website is not setup with HTTPS but should cover all the functionalities outside of Geolocation.
+Geolocation is setup to be used on results_sample and submit_location pages and can be viewed on local if interested.
+
 Additional External Sources used:
 Application of Footer - https://matthewjamestaylor.com/bottom-footer
 Password Verification - https://www.javatpoint.com/confirm-password-validation-in-javascript
