@@ -3,6 +3,7 @@ ANDY NG 400119512 nga15
 http://3.130.231.165/GAMER/index.html
 http://3.130.231.165/GAMER/results_sample.html
 http://3.130.231.165/GAMER/individual_sample.html
+http://3.130.231.165/GAMER/submit_location.html
 
 for add-on 2d:
 i.not using different version here, only thing i can do is make all picture blury here but i dont want to.
@@ -13,3 +14,9 @@ i guess, lower resolution saves data, load faster, make it easier to organize. i
 10mbps fiber cant load a picture?
 ii.saves data, load faster, make it easier to organize.
 iii blurry.
+
+Part 2:
+
+Additional External Sources used:
+Application of Footer - https://matthewjamestaylor.com/bottom-footer
+Password Verification - https://www.javatpoint.com/confirm-password-validation-in-javascript
