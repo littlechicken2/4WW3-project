@@ -67,16 +67,58 @@
     <?php include 'navbar.inc'; ?>
 
     <!-- Search Bar and Search Buttons-->
-    <h1 class = "neonText animate__animated animate__fadeIn">Search results for: EB GAMES</h1>
+    <h1 class = "neonText animate__animated animate__fadeIn" id="input"></h1>
     <button class="button1 btn start" type="submit" onclick="local()"><span>Search</span></button>
     <button class="button1 btn start" type="submit" onclick="getLocation()"><span>Search nearby</span></button>
     <div class="row">
+
+      <script type="text/javascript">
+        let url = window.location.href;
+        for (let i = 0; i < url.length; i++) {
+          if (url.substring(i, i+7) == "search="){
+            searchterm = url.substring(i+7);
+            break;
+          }
+        }
+        document.getElementById("input").textContent = "Search results for: " + searchterm;
+      </script>
 
       <!-- Sample Results -->
       <div class = "column3a">
         <a href="http://3.130.231.165/GAMER/individual_sample.html">
           <div class = "neonbox card">
             <h2 class="neonText">EB games</h2>
+                <?php
+                  require_once 'connect.php';
+                  $pdo = new PDO("mysql:host=$host;dbname=$dbname",$username,$password);
+
+                  /*
+                  $stmt= $pdo->query('SELECT * FROM `Locations` WHERE `Address` LIKE "1227 Barton Street East"');
+                  
+                  foreach($stmt as $row) {
+                    echo "<td>" . $row['Address'] . "</td>";
+                  }
+                  */
+
+                  //$search = $_GET["search"];
+                  $stmt = $pdo->prepare('SELECT * FROM `Locations` WHERE `Name` LIKE :search OR `Address` LIKE :search OR `City` LIKE :search OR `Province` LIKE :search');
+                  $stmt->bindValue(':search', $_GET['search']);
+                  $stmt->execute();
+                  foreach($stmt as $row) {
+                    echo '<hr class="neon">';
+                    echo '<img src="r1.jpg" style="width:50%; height:200px; float:left" alt="shopimage">';
+                    echo '<p></p>';
+                    echo '<p class="whitetext">' . $row['Name'] . "</p>";
+                    echo '<p class="whitetext">' . $row['Address'] . "</p>";
+                    echo '<p class="whitetext">' . $row['City'] . ", " . $row['Province'] . "</p>";
+                    echo '<p class="whitetext">' . $row['Postal Code'] . "</p>";
+                    echo '<p class="whitetext">' . $row['Telephone']  . "</p>";
+                    echo '<p></p>';
+                  }
+
+
+                ?>
+                <!--
             <hr class="neon">
             <img src="r1.jpg" style="width:50%; height:150px; float:left" alt="shopimage">
             <p></p>
@@ -93,6 +135,7 @@
             <p class="whitetext">878 King Street West</p>
             <p class="whitetext">Hamilton, ON L8S 4S6</p>
             <p></p>
+            -->
           </div>
         </a>
       </div>
@@ -114,6 +157,8 @@
       L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
       }).addTo(map);
+
+      
 
       // Marker 1 Location
       L.marker([43.258007, -79.942983])
@@ -150,6 +195,7 @@
       function local(){
         map.panTo([43.263,-79.919], 14);  
       }
+
       </script>
 
     <p>-</p>
