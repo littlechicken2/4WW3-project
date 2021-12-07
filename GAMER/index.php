@@ -55,18 +55,6 @@
     <!-- NavBar Start -->
     <?php include 'navbar.inc'; ?>
 
-    <?php
-      require_once 'connect.php';
-      $pdo = new PDO("mysql:host=$host;dbname=$dbname",$username,$password);
-
-      $stmt= $pdo->query('SELECT * FROM `Locations` WHERE `Address` LIKE "1227 Barton Street East"');
-      
-      foreach($stmt as $row) {
-        echo "<td>" . $row['Address'] . "</td>";
-      }
-
-    ?>
-
     <div class="neonbox">
       <h1 class="neonText animate__animated animate__backInDown">GamerFriend</h1>
       <h2 class="neonText animate__animated animate__backInDown animate__delay-1s">The Ultimate Gameshop Finder</h2>
@@ -74,19 +62,20 @@
       <!-- Gamgle Search Bar -->
       <form role="search" id="form" class="form1 animate__animated animate__zoomInDown animate__delay-3s">
         <input type="search" id="query" name="search" class="input1" placeholder="Gamgle"
-        aria-label="Search through site content" onkeypress="enter(event)" />>
+        aria-label="Search through site content" />>
       </form>
       <!-- Search Buttons -->
       <button class="button1 btn start animate__animated animate__bounceInLeft animate__delay-2s" type="submit" id="search1" onclick="search()"><span>Search </span></button>
-      <button class="button1 btn start animate__animated animate__bounceInRight animate__delay-2s" type="submit" onclick="location.href='http://18.223.27.232/GAMER/results_sample.html';"><span>Search nearby</span></button>
+      <button class="button1 btn start animate__animated animate__bounceInRight animate__delay-2s" type="submit" id="search2" onclick="search()"><span>Search nearby</span></button>
       
       <script type="text/javascript">
         function search(){
           input = document.getElementById("query").value;
-          searchURL = 'http://localhost/GAMER/index.php?search=' + input;
+          searchURL = 'http://localhost/GAMER/results_sample.php?search=' + input;
           window.location.replace(searchURL);
           //document.getElementById("oop").textContent = searchURL;
         }
+
         /*function enter(event){
           if (event.keyCode == 65){
             search();

@@ -71,20 +71,32 @@
       <h1 class = "neonText">EBGAMES</h1>
       <hr class="neon">
       <div class="row">
-      <p></p>
-
-        <!-- Location Details -->
+        <p></p>
         <div class="column2">
           <div class = "neonbox card">
-            <h2 class="neonText">EB GAMES</h2>
-            <hr class="neon">
-            <img src="r1.jpg" style="width:100%" alt="shopimage">
-            <p class="whitetext">2.2km <b>from you</b></p>
-            <p class="whitetext"><b>Address: </b>University Plaza, 101 Osler Dr Unit 134B, Dundas, ON L9H 4H4</p>
+        <!-- Location Details -->
+          <?php
+            require_once 'connect.php';
+            $pdo = new PDO("mysql:host=$host;dbname=$dbname",$username,$password);
+
+            //$search = $_GET["search"];
+            $stmt = $pdo->prepare('SELECT * FROM `Locations` WHERE `Name` LIKE :id OR `Address` LIKE :id OR `City` LIKE :id OR `Province` LIKE :id');
+            $stmt->bindValue(':id', $_GET['id']);
+            $stmt->execute();
+            foreach($stmt as $row) {
+              echo '<h2 class="neonText">' . $row['Name'] . '</h2>';
+              echo '<hr class="neon">';
+              echo '<p class="whitetext">' . $row['Address'] . "</p>";
+              echo '<p class="whitetext">' . $row['City'] . ", " . $row['Province'] . ", " . $row['Postal Code'] . "</p>";
+              echo '<p class="whitetext">' . $row['Telephone']  . "</p>";
+              echo '<p></p>';
+              echo '<img src="r1.jpg" style="width:100%;" alt="shopimage">';
+            }
+          ?>
+        
           </div>
         </div>
 
-        
         <div class="column2">
           <!-- Location on Map -->
           <div class = "neonbox card">
@@ -112,11 +124,31 @@
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
       }).addTo(map);
 
-      // Create a marker at Location
-      L.marker([43.258007, -79.942983])
-       .addTo(map)
-       .bindPopup("<b><a href='http://www.ebgames.ca'>EB Games</a></b> at University Plaza, 101 Osler Dr. Unit 134B")
-       .openPopup();
+      var ajax = new XMLHttpRequest();
+      ajax.open("GET", "database.php", true);
+      ajax.send();
+      ajax.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+          var data = JSON.parse(this.responseText);
+          console.log(data);
+
+          var html = "";
+          for(var a = 0; a < data.length; a++){
+              marker1(data[a]);
+          }
+        }
+      };
+
+      // generates a marker for the store and includes its info
+      function marker1(store){
+        map.panTo([store.Latitude,store.Longitude], 14);
+        L.marker([store.Latitude, store.Longitude])
+         .addTo(map)
+         .bindPopup('<b><a href="http://www.ebgames.ca">EB Games</a></b> at ' + store.Name + ', ' + store.Address)
+         .openPopup();
+      }
+
       </script>
 
       <!-- Comments Area -->
