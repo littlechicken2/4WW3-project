@@ -68,6 +68,10 @@
 
     <!-- Search Bar and Search Buttons-->
     <h1 class = "neonText animate__animated animate__fadeIn" id="input"></h1>
+    <form role="search" id="form" class="form1">
+      <input type="search" id="query" name="search" class="input1" placeholder="Gamgle"
+      aria-label="Search through site content" />>
+    </form>
     <button class="button1 btn start" type="submit" onclick="local()"><span>Search</span></button>
     <button class="button1 btn start" type="submit" onclick="getLocation()"><span>Search nearby</span></button>
     <div class="row">
@@ -97,7 +101,7 @@
                   $stmt->execute();
                   foreach($stmt as $row) {
                     echo '<div>';
-                    echo "<a href='http://18.223.27.232/GAMER/individual_sample.php?id=" . $row['Name'] . "'>";
+                    echo "<a href='http://localhost/GAMER/individual_sample.php?id=" . $row['Name'] . "'>";
                     echo '<hr class="neon">';
                     echo '<img src="r1.jpg" style="width:50%; height:200px; float:left" alt="shopimage">';
                     echo '<p></p>';
