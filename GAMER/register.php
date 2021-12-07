@@ -101,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="project.css">
 </head>
 <body>
-    <?php include 'navbar.inc'; ?>
+    <?php include 'notlogin.inc'; ?>
     <div id="container" class="width">
     <h1 class = "neonText">sign up</h1>
         <form class="modal-content" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

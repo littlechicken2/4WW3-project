@@ -53,7 +53,17 @@
   <img src="10.png" class="bg" alt="bg">
   <div id="container">
     <!-- NavBar Start -->
-    <?php include 'navbar.inc'; ?>
+    <?php
+      // Initialize the session
+      session_start();
+      require_once "config.php";
+      if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        include 'notlogin.inc';
+      }
+      else{
+        include 'navbar.inc';
+      }
+    ?>
 
     <div class="neonbox">
       <h1 class="neonText animate__animated animate__backInDown">GamerFriend</h1>

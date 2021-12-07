@@ -1,9 +1,8 @@
 <?php
 // Initialize the session
-session_destroy();
 session_start(); //https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php
  
-// Check if the user is already logged in, if yes then redirect him to welcome page
+// Check if the user is already logged in, if yes then redirect him to home page
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
@@ -63,8 +62,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;                            
                             
-                            // Redirect user to welcome page
-                            header("location: welcome.php");
+                            // Redirect user to home page
+                            header("location: index.php");
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password.";
@@ -96,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="project.css">
 </head>
 <body>
-    <?php include 'navbar.inc'; ?>  
+<?php include 'notlogin.inc'; ?> 
     <div id="container" class="width" >
         <h1 class = "neonText">Login</h1>
 
