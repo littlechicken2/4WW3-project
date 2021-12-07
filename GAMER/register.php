@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once "config.php";
+require_once "config.php";  //https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php
  
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate username
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
-    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))){
+    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))){  //my old form validation is so much worse than this example, i decide to use the better one instead
         $username_err = "Username can only contain letters, numbers, and underscores.";
     } else{
         // Prepare a select statement
@@ -99,34 +99,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title >Sign Up</title>
     <link rel="stylesheet" href="project.css">
-    <style>
-        .wrapper{ width: 50%; padding: 20px; margin: auto; font-size: 50px;}
-    </style>
 </head>
 <body>
-    <div class="wrapper">
-        <h2 class = "neonText" style="font-size: 50px">Sign Up</h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <?php include 'navbar.inc'; ?>
+    <div id="container" class="width">
+    <h1 class = "neonText">sign up</h1>
+        <form class="modal-content" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
-                <label class = "neonText">Username</label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>"> <!--give err msg and form validation-->
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group">
-                <label class = "neonText">Password</label>
+                <label>Password</label>
                 <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
-                <label class = "neonText">Confirm Password</label>
+                <label>Confirm Password</label>
                 <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
                 <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group">
-                <button type="submit" value="Submit">
+                <input type="submit" class="button2" value="Submit">
             </div>
             <p>Already have an account? <a href="login.php">Login here</a>.</p>
         </form>
-    </div>    
+    </div>
+    <?php include 'footer.inc'; ?>
 </body>
+
 </html>
