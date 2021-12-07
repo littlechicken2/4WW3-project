@@ -1,7 +1,7 @@
 <!-- NavBar Start -->
 
 <ul>
-	<li><a href="http://localhost/GAMER/index.php">Home</a></li>
+	<li><a href="http://18.223.27.232/GAMER/index.php">Home</a></li>
 	<li class="lii"><header class="neonText animate__animated animate__fadeIn animate__delay-2s"> GamerFriend - The Ultimate Gameshop Finder</header></li>
 	<li class="ri"><button class="button2 animate__animated animate__fadeIn animate__delay-2s" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
 	<li class="ri"><button class="button2 animate__animated animate__fadeIn animate__delay-2s" onclick="location.href='http://3.130.231.165/GAMER/submit_location.html'">Submit Location</button></li>

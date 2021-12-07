@@ -83,7 +83,7 @@
         document.getElementById("input").textContent = "Search results for: " + searchterm;
       </script>
 
-      <!-- Sample Results -->
+      <!-- Search Results -->
       <div class = "column3a">
           <div class = "neonbox card">
             <h2 class="neonText">EB games</h2>
@@ -97,7 +97,7 @@
                   $stmt->execute();
                   foreach($stmt as $row) {
                     echo '<div>';
-                    echo "<a href='http://localhost/GAMER/individual_sample.php?id=" . $row['Name'] . "'>";
+                    echo "<a href='http://18.223.27.232/GAMER/individual_sample.php?id=" . $row['Name'] . "'>";
                     echo '<hr class="neon">';
                     echo '<img src="r1.jpg" style="width:50%; height:200px; float:left" alt="shopimage">';
                     echo '<p></p>';
@@ -120,7 +120,6 @@
           <h2 class="neonText">MAP</h2>
           <hr class="neon">
           <div id="map"></div>
-          <!--<img src="l1.png" class="img" alt="location"> -->
         </div>
       </div>
     </div>
@@ -203,35 +202,6 @@
          .bindPopup("You are <b>Here</b>")
          .openPopup();
       }
-
-      /*
-      // Marker 1 Location
-      L.marker([43.258007, -79.942983])
-       .addTo(map)
-       .bindPopup("<b><a href='http://www.ebgames.ca'>EB Games</a></b> at University Plaza, 101 Osler Dr. Unit 134B")
-       .openPopup();
-
-      // Marker 2 Location
-      L.marker([43.263344, -79.900986])
-       .addTo(map)
-       .bindPopup("<b><a href='http://www.ebgames.ca'>EB Games</a></b> at Westdale, 878 King Street West")
-       .openPopup();
-
-      function doSubmit(){
-        request = new XMLHttpRequest();
-
-        request.onload = function(){
-          if (this.status == 200) {
-            store = request.responseXML;
-            document.getElementById("output").innerHTML = ", " + this.response;
-          }            
-        };
-
-        request.open("POST", "database.php");
-        request.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-        request.send("num=" + encodeURIComponent(document.getElementById("test").value));
-      }
-      */
       </script>
 
     <p>-</p>

@@ -71,7 +71,7 @@
       <script type="text/javascript">
         function search(){
           input = document.getElementById("query").value;
-          searchURL = 'http://localhost/GAMER/results_sample.php?search=' + input;
+          searchURL = 'http://18.223.27.232/GAMER/results_sample.php?search=' + input;
           window.location.replace(searchURL);
           //document.getElementById("oop").textContent = searchURL;
         }
