@@ -92,14 +92,6 @@
                   require_once 'connect.php';
                   $pdo = new PDO("mysql:host=$host;dbname=$dbname",$username,$password);
 
-                  /*
-                  $stmt= $pdo->query('SELECT * FROM `Locations` WHERE `Address` LIKE "1227 Barton Street East"');
-                  
-                  foreach($stmt as $row) {
-                    echo "<td>" . $row['Address'] . "</td>";
-                  }
-                  */
-
                   //$search = $_GET["search"];
                   $stmt = $pdo->prepare('SELECT * FROM `Locations` WHERE `Name` LIKE :search OR `Address` LIKE :search OR `City` LIKE :search OR `Province` LIKE :search');
                   $stmt->bindValue(':search', $_GET['search']);
@@ -115,27 +107,7 @@
                     echo '<p class="whitetext">' . $row['Telephone']  . "</p>";
                     echo '<p></p>';
                   }
-
-
                 ?>
-                <!--
-            <hr class="neon">
-            <img src="r1.jpg" style="width:50%; height:150px; float:left" alt="shopimage">
-            <p></p>
-            <p class="whitetext">2.2km <b>from you</b></p>
-            <p class="whitetext"><b>Address: </b>University Plaza</p>
-            <p class="whitetext">101 Osler Dr. Unit 134B</p>
-            <p class="whitetext">Dundas, ON L9H 4H4</p>
-            <p></p>
-            <hr class="neon">
-            <img src="r1.jpg" style="width:50%; height:150px; float:left" alt="shopimage">
-            <p></p>
-            <p class="whitetext">1km <b>from you</b></p>
-            <p class="whitetext"><b>Address: </b>Westdale</p>
-            <p class="whitetext">878 King Street West</p>
-            <p class="whitetext">Hamilton, ON L8S 4S6</p>
-            <p></p>
-            -->
           </div>
         </a>
       </div>
@@ -152,14 +124,85 @@
     </div>
 
     <script>
+
       // Initialize Map and OpenStreetMap Tile Layer
       var map = L.map('map').setView([43.263,-79.919], 14);
       L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
       }).addTo(map);
 
-      
+      var ajax = new XMLHttpRequest();
+      ajax.open("GET", "database.php", true);
+      ajax.send();
+      ajax.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+          var data = JSON.parse(this.responseText);
+          console.log(data);
 
+          var html = "";
+          for(var a = 0; a < data.length; a++){
+            var name = data[a].Name;
+            var address = data[a].Address;
+            var city = data[a].City;
+            html += "<tr>";
+              html += "<td>" + name + "</td>";
+              html += "<td>" + address + "</td>";
+              html += "<td>" + city + "</td>";
+            html += "</tr>";
+            
+            if (a == 0){
+              local(data[a]);
+              marker1(data[a]);
+            }
+            else{
+              marker(data[a]);
+            }
+            
+          }
+        }
+      };
+
+      // local function to pan back to map with search results upon clicking "Search"
+      function local(store){
+        map.panTo([store.Latitude,store.Longitude], 14);  
+      }
+
+      // generates a marker from all the search results and includes its info
+      function marker1(store){
+        L.marker([store.Latitude, store.Longitude])
+         .addTo(map)
+         .bindPopup('<b><a href="http://www.ebgames.ca">EB Games</a></b> at ' + store.Name + ', ' + store.Address)
+         .openPopup();
+      }
+
+      // generates a marker from all the search results and includes its info
+      function marker(store){
+        L.marker([store.Latitude, store.Longitude])
+         .addTo(map)
+         .bindPopup('<b><a href="http://www.ebgames.ca">EB Games</a></b> at ' + store.Name + ', ' + store.Address)
+      }
+
+      // getLocation Function to prompt for user's location upon clicking "Search Nearby"
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+
+      // showPosition function called from getLocation to display user's location and add a marker
+      function showPosition(position) {
+        map.panTo([position.coords.latitude, position.coords.longitude], 15);
+
+        L.marker([position.coords.latitude, position.coords.longitude])
+         .addTo(map)
+         .bindPopup("You are <b>Here</b>")
+         .openPopup();
+      }
+
+      /*
       // Marker 1 Location
       L.marker([43.258007, -79.942983])
        .addTo(map)
@@ -172,30 +215,21 @@
        .bindPopup("<b><a href='http://www.ebgames.ca'>EB Games</a></b> at Westdale, 878 King Street West")
        .openPopup();
 
-      // getLocation Function to prompt for user's location upon clicking "Search Nearby"
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } else { 
-          x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-      }
-         
-      // showPosition function called from getLocation to display user's location and add a marker
-      function showPosition(position) {
-        map.panTo([position.coords.latitude, position.coords.longitude], 15);
+      function doSubmit(){
+        request = new XMLHttpRequest();
 
-        L.marker([position.coords.latitude, position.coords.longitude])
-         .addTo(map)
-         .bindPopup("You are <b>Here</b>")
-         .openPopup();
-      }
+        request.onload = function(){
+          if (this.status == 200) {
+            store = request.responseXML;
+            document.getElementById("output").innerHTML = ", " + this.response;
+          }            
+        };
 
-      // local function to pan back to map with search results upon clicking "Search"
-      function local(){
-        map.panTo([43.263,-79.919], 14);  
+        request.open("POST", "database.php");
+        request.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        request.send("num=" + encodeURIComponent(document.getElementById("test").value));
       }
-
+      */
       </script>
 
     <p>-</p>
