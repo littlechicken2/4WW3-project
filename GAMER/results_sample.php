@@ -85,7 +85,6 @@
 
       <!-- Sample Results -->
       <div class = "column3a">
-        <a href="http://3.130.231.165/GAMER/individual_sample.html">
           <div class = "neonbox card">
             <h2 class="neonText">EB games</h2>
                 <?php
@@ -97,6 +96,8 @@
                   $stmt->bindValue(':search', $_GET['search']);
                   $stmt->execute();
                   foreach($stmt as $row) {
+                    echo '<div>';
+                    echo "<a href='http://localhost/GAMER/individual_sample.php?id=" . $row['Name'] . "'>";
                     echo '<hr class="neon">';
                     echo '<img src="r1.jpg" style="width:50%; height:200px; float:left" alt="shopimage">';
                     echo '<p></p>';
@@ -106,6 +107,7 @@
                     echo '<p class="whitetext">' . $row['Postal Code'] . "</p>";
                     echo '<p class="whitetext">' . $row['Telephone']  . "</p>";
                     echo '<p></p>';
+                    echo '</div>';
                   }
                 ?>
           </div>
