@@ -70,7 +70,7 @@
   if(empty($inputname_err) && empty($inputaddress_err) && empty($inputcity_err) && empty($inputprovince_err) && empty($inputpostalcode_err) && empty($inputphone_err) && empty($latitude_err) && empty($longitude_err)){
 
     // Prepare an insert statement
-    $sql = "INSERT INTO Locations (Name, Address, City, Province, Postal Code, Latitude, Longitude, Phone) VALUES (:inputname, :inputaddress, :inputcity, :inputprovince, :inputpostalcode, :latitude, :longitude, :inputphone)";
+    $sql = "INSERT INTO Locations (Name, Address, City, Province, Postal Code, Latitude, Longitude, Telephone) VALUES (:inputname, :inputaddress, :inputcity, :inputprovince, :inputpostalcode, :latitude, :longitude, :inputphone)";
 
     if($stmt = $pdo->prepare($sql)){
       // Bind variables to the prepared statement as parameters
