@@ -65,30 +65,54 @@
       <p></p>
 
       <!-- Location Submission Form -->
-      <form class="modal-content animate" method="post">
+      <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div class="neonbox container">
           <p></p>
+
           <label id="name"><b>Location Name: </b></label>
-          <input type="text" placeholder="Limeridge Mall" id="inputname" required>
+          <input type="text" placeholder="Limeridge Mall" class="form-control <?php echo (!empty($inputname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputname; ?>" 
+          id="inputname" required>
+          <span class="invalid-feedback"><?php echo $inputname_err; ?></span>
           <p></p>
+
           <label id="address"><b>Street Address: </b></label>
-          <input type="text" placeholder="999 Upper Wentworth" id="inputaddress" required>
+          <input type="text" placeholder="999 Upper Wentworth" class="form-control <?php echo (!empty($inputaddress)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputaddress; ?>" 
+          id="inputaddress" required>
+          <span class="invalid-feedback"><?php echo $inputaddress_err; ?></span>
           <p></p>
+
           <label id="city"><b>City: </b></label>
-          <input type="text" placeholder="Hamilton" id="inputcity" required>
+          <input type="text" placeholder="Hamilton" class="form-control <?php echo (!empty($inputcity)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputcity; ?>"
+          id="inputcity" required>
+          <span class="invalid-feedback"><?php echo $inputcity_err; ?></span>
           <p></p>
+
           <label id="province"><b>Province: </b></label>
-          <input type="text" placeholder="Ontario" id="inputprovince" required>
+          <input type="text" placeholder="Ontario" class="form-control <?php echo (!empty($inputprovince)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputprovince; ?>"
+          id="inputprovince" required>
+          <span class="invalid-feedback"><?php echo $inputprovince_err; ?></span>
           <p></p>
+
           <label id="postal code"><b>Postal Code: </b></label>
-          <input type="text" placeholder="L9A 4X5" id="inputpostalcode" required>
+          <input type="text" placeholder="L9A 4X5" class="form-control <?php echo (!empty($inputpostalcode)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputpostalcode; ?>"
+          id="inputpostalcode" required>
+          <span class="invalid-feedback"><?php echo $inputpostalcode_err; ?></span>
           <p></p>
+
           <label id="phone"><b>Phone Number: </b></label>
-          <input type="text" placeholder="905-318-6089" id="inputphone" required>
+          <input type="text" placeholder="905-318-6089" class="form-control <?php echo (!empty($inputphone)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputphone; ?>"
+          id="inputphone" required>
+          <span class="invalid-feedback"><?php echo $inputphone_err; ?></span>
           <p></p>
+
           <label id="coordinate"><b>(Latitude,Longtitude): </b></label>
-          <input type="number" placeholder="43.217627" id="latitude" required min="-90" max="90" step="0.001">
-          <input type="number" placeholder="-79.863722" id="longitude" required min="-180" max="180" step="0.001">
+          <input type="number" placeholder="43.217627" class="form-control <?php echo (!empty($latitude)) ? 'is-invalid' : ''; ?>" value="<?php echo $latitude; ?>"
+          id="latitude" required min="-90" max="90" step="0.001">
+          <span class="invalid-feedback"><?php echo $latitude_err; ?></span>
+          
+          <input type="number" placeholder="-79.863722" class="form-control <?php echo (!empty($longitude)) ? 'is-invalid' : ''; ?>" value="<?php echo $longitude; ?>"
+          id="longitude" required min="-180" max="180" step="0.001">
+          <span class="invalid-feedback"><?php echo $longitude_err; ?></span>
           <p></p>
 
           <?php
@@ -108,12 +132,7 @@
                 // Prepare a select statement
                 $sql = "SELECT Name FROM Locations WHERE inputname = :inputname";
                 
-                if($stmt = $pdo->prepare($sql)){
-                  // Bind variables to the prepared statement as parameters
-                  $stmt->bindParam(":inputname", $param_inputname, PDO::PARAM_STR);
-                    
-                  // Set parameters
-                  $param_username = trim($_POST["inputname"]);
+                if($stmt = $pdo->prepare($sql)){                  
                     
                   // Attempt to execute the prepared statement
                   if($stmt->execute()){
@@ -189,6 +208,7 @@
 
               if($stmt = $pdo->prepare($sql)){
                 // Bind variables to the prepared statement as parameters
+                $stmt->bindParam(":inputname", $param_inputname, PDO::PARAM_STR);
                 $stmt->bindParam(":inputaddress", $param_inputaddress, PDO::PARAM_STR);
                 $stmt->bindParam(":inputcity", $param_inputcity, PDO::PARAM_STR);
                 $stmt->bindParam(":inputprovince", $param_inputprovince, PDO::PARAM_STR);
@@ -199,7 +219,7 @@
                 
                 // Set parameters
                 $param_inputname = $inputname;
-                $param_inputaddress = $inputaddress; // Creates a password hash
+                $param_inputaddress = $inputaddress;
                 $param_inputcity = $inputcity;
                 $param_inputprovince = $inputprovince;
                 $param_inputpostalcode = $inputpostalcode;
@@ -210,7 +230,7 @@
                 // Attempt to execute the prepared statement
                 if($stmt->execute()){
                     // Redirect to login page
-                    header("location: login.php");
+                    header("location: submit_location.php");
                 } 
                 else{
                     echo "Something went wrong.";
