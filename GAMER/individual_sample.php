@@ -34,45 +34,21 @@
        height:60px;
     }
   </style>
-
-  <!-- Validate Form Script -->
-  <script>
-    function validateForm() {
-      let x = document.forms["login"]["uname"].value;  //the html5 types are so much better
-      let y = document.forms["login"]["psw"].value;
-      if (x == "") {
-        alert("Enter Name");
-        return false;
-      }
-      if(y == "") {   //https://www.javatpoint.com/confirm-password-validation-in-javascript
-        alert("Enter Password");
-        return false;  
-      }  
-      if(y.length < 8) {  
-        alert("Password length must be atleast 8 characters");
-        return false;  
-      }  
-      if(y.length > 15) {  
-        alert("Password length must not exceed 15 characters");
-        return false;  
-      }
-    }
-  </script>
 </head>
 
 <body>
   <img src="10.png" class="bg" alt="bg">
   <div id="container">
     <!-- NavBar Start -->
-    <?php
+    <?php 
       // Initialize the session
       session_start();
       require_once "config.php";
       if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-        include 'notlogin.inc';
+        include 'notloggedin.inc';
       }
       else{
-        include 'navbar.inc';
+        include 'loggedin.inc';
       }
     ?>
 
@@ -86,10 +62,7 @@
           <div class = "neonbox card">
         <!-- Location Details -->
           <?php
-            require_once 'connect.php';
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname",$username,$password);
-
-            //$search = $_GET["search"];
+            require_once 'config.php';
             $stmt = $pdo->prepare('SELECT * FROM `Locations` WHERE `Name` LIKE :id OR `Address` LIKE :id OR `City` LIKE :id OR `Province` LIKE :id');
             $stmt->bindValue(':id', $_GET['id']);
             $stmt->execute();
@@ -102,6 +75,9 @@
               echo '<p></p>';
               echo '<img src="r1.jpg" style="width:100%;" alt="shopimage">';
             }
+            unset($stmt);
+            // Close connection
+            unset($pdo);
           ?>
         
           </div>

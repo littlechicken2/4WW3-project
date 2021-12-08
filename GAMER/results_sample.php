@@ -79,7 +79,6 @@
             <h2 class="neonText">EB games</h2>
                 <?php
                   require_once "config.php";
-                  //$search = $_GET["search"];
                   $stmt = $pdo->prepare('SELECT * FROM `Locations` WHERE `Name` LIKE :search OR `Address` LIKE :search OR `City` LIKE :search OR `Province` LIKE :search');
                   $stmt->bindValue(':search', $_GET['search']);
                   $stmt->execute();
