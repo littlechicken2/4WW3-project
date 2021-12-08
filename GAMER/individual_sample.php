@@ -74,7 +74,7 @@
               echo '<h2 class="neonText">' . $row['Name'] . '</h2>';
               echo '<hr class="neon">';
               echo '<p class="whitetext">' . $row['Address'] . "</p>";
-              echo '<p class="whitetext">' . $row['City'] . ", " . $row['Province'] . ", " . $row['Postal Code'] . "</p>";
+              echo '<p class="whitetext">' . $row['City'] . ", " . $row['Province'] . ", " . $row['Postal_Code'] . "</p>";
               echo '<p class="whitetext">' . $row['Telephone']  . "</p>";
               echo '<p></p>';
               echo '<img src="r1.jpg" style="width:100%;" alt="shopimage">';

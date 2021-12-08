@@ -96,7 +96,7 @@
                 echo '<p class="whitetext">' . $row['Name'] . "</p>";
                 echo '<p class="whitetext">' . $row['Address'] . "</p>";
                 echo '<p class="whitetext">' . $row['City'] . ", " . $row['Province'] . "</p>";
-                echo '<p class="whitetext">' . $row['Postal Code'] . "</p>";
+                echo '<p class="whitetext">' . $row['Postal_Code'] . "</p>";
                 echo '<p class="whitetext">' . $row['Telephone']  . "</p>";
                 echo '<p></p>';
                 echo '</div>';
