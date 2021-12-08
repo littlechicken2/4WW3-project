@@ -44,6 +44,7 @@
       // Initialize the session
       session_start();
       require_once "config.php";
+      // Shows different NavBar depending on Logged In state
       if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         include 'notloggedin.inc';
       }
@@ -62,6 +63,7 @@
     <button class="button1 btn start" type="submit" onclick="getLocation()"><span>Search nearby</span></button>
     <div class="row">
 
+      <!-- Goes through url and finds the search term entered from index webpage -->
       <script type="text/javascript">
         let url = window.location.href;
         for (let i = 0; i < url.length; i++) {
@@ -75,31 +77,34 @@
 
       <!-- Search Results -->
       <div class = "column3a">
-          <div class = "neonbox card">
-            <h2 class="neonText">EB games</h2>
-                <?php
-                  require_once "config.php";
-                  $stmt = $pdo->prepare('SELECT * FROM `Locations` WHERE `Name` LIKE :search OR `Address` LIKE :search OR `City` LIKE :search OR `Province` LIKE :search');
-                  $stmt->bindValue(':search', $_GET['search']);
-                  $stmt->execute();
-                  foreach($stmt as $row) {
-                    echo '<div>';
-                    echo "<a href='http://18.223.27.232/GAMER/individual_sample.php?id=" . $row['Name'] . "'>";
-                    echo '<hr class="neon">';
-                    echo '<img src="r1.jpg" style="width:50%; height:200px; float:left" alt="shopimage">';
-                    echo '<p></p>';
-                    echo '<p class="whitetext">' . $row['Name'] . "</p>";
-                    echo '<p class="whitetext">' . $row['Address'] . "</p>";
-                    echo '<p class="whitetext">' . $row['City'] . ", " . $row['Province'] . "</p>";
-                    echo '<p class="whitetext">' . $row['Postal Code'] . "</p>";
-                    echo '<p class="whitetext">' . $row['Telephone']  . "</p>";
-                    echo '<p></p>';
-                    echo '</div>';
-                  }
-                  unset($stmt);
-                  // Close connection
-                  unset($pdo);
-                ?>
+        <div class = "neonbox card">
+          <h2 class="neonText">EB games</h2>
+            <?php
+              require_once "config.php";
+              // Prepares a query where search is the same as the City or Province of a Store
+              $stmt = $pdo->prepare('SELECT * FROM `Locations` WHERE `City` LIKE :search OR `Province` LIKE :search');
+              $stmt->bindValue(':search', $_GET['search']);
+              $stmt->execute();
+
+              // Generates the details of every store found from search 
+              foreach($stmt as $row) {
+                echo '<div>';
+                echo "<a href='http://18.223.27.232/GAMER/individual_sample.php?id=" . $row['Name'] . "'>";
+                echo '<hr class="neon">';
+                echo '<img src="r1.jpg" style="width:50%; height:200px; float:left" alt="shopimage">';
+                echo '<p></p>';
+                echo '<p class="whitetext">' . $row['Name'] . "</p>";
+                echo '<p class="whitetext">' . $row['Address'] . "</p>";
+                echo '<p class="whitetext">' . $row['City'] . ", " . $row['Province'] . "</p>";
+                echo '<p class="whitetext">' . $row['Postal Code'] . "</p>";
+                echo '<p class="whitetext">' . $row['Telephone']  . "</p>";
+                echo '<p></p>';
+                echo '</div>';
+              }
+              // Close stmt and connection
+              unset($stmt);
+              unset($pdo);
+            ?>
           </div>
         </a>
       </div>
@@ -122,21 +127,26 @@
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
       }).addTo(map);
 
+      // Gets data from database and converts it into AJAX to create a .json file
+      // Only way I found to grab database information and use it in javascript to alter map information
+      // Source used - https://adnan-tech.com/get-data-from-database-using-ajax-javascript-php-mysql/
       var ajax = new XMLHttpRequest();
       ajax.open("GET", "database.php", true);
       ajax.send();
       ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          // Gets response text and parses it into a .json format to get the entries
           console.log(this.responseText);
           var data = JSON.parse(this.responseText);
           console.log(data);
 
-          var html = "";
           for(var a = 0; a < data.length; a++){
+            // Pan camera to show the location of the first result found from our database and opens popup
             if (a == 0){
               local(data[a]);
               marker1(data[a]);
             }
+            // Generate a marker for the rest of the results
             else{
               marker(data[a]);
             }
@@ -149,7 +159,7 @@
         map.panTo([store.Latitude,store.Longitude], 14);  
       }
 
-      // generates a marker from all the search results and includes its info
+      // generates a marker from the search results and adds opens the marker popup
       function marker1(store){
         L.marker([store.Latitude, store.Longitude])
          .addTo(map)
@@ -157,7 +167,7 @@
          .openPopup();
       }
 
-      // generates a marker from all the search results and includes its info
+      // generates a marker from all the search results
       function marker(store){
         L.marker([store.Latitude, store.Longitude])
          .addTo(map)
