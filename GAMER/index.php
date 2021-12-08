@@ -32,6 +32,7 @@
       // Initialize the session
       session_start();
       require_once "config.php";
+      // Shows different NavBar depending on Logged In state
       if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         include 'notloggedin.inc';
       }
@@ -41,6 +42,7 @@
     ?>
 
     <div class="neonbox">
+      <!-- Title -->
       <h1 class="neonText animate__animated animate__backInDown">GamerFriend</h1>
       <h2 class="neonText animate__animated animate__backInDown animate__delay-1s">The Ultimate Gameshop Finder</h2>
       <p></p>
@@ -55,6 +57,7 @@
       <button class="button1 btn start animate__animated animate__bounceInRight animate__delay-2s" type="submit" id="search2" onclick="search()"><span>Search nearby</span></button>
       
       <script type="text/javascript">
+        // Search Button will redirect to results sample webpage along with search term
         function search(){
           input = document.getElementById("query").value;
           searchURL = 'http://18.223.27.232/GAMER/results_sample.php?search=' + input;

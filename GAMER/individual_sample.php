@@ -44,6 +44,7 @@
       // Initialize the session
       session_start();
       require_once "config.php";
+      // Shows different NavBar depending on Logged In state
       if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         include 'notloggedin.inc';
       }
@@ -63,20 +64,23 @@
         <!-- Location Details -->
           <?php
             require_once 'config.php';
-            $stmt = $pdo->prepare('SELECT * FROM `Locations` WHERE `Name` LIKE :id OR `Address` LIKE :id OR `City` LIKE :id OR `Province` LIKE :id');
+            // Prepares a query where id is the same as the City or Province of a Store
+            $stmt = $pdo->prepare('SELECT * FROM `Locations` WHERE `City` LIKE :id OR `Province` LIKE :id');
             $stmt->bindValue(':id', $_GET['id']);
             $stmt->execute();
+
+            // Generates the details of the store
             foreach($stmt as $row) {
               echo '<h2 class="neonText">' . $row['Name'] . '</h2>';
               echo '<hr class="neon">';
               echo '<p class="whitetext">' . $row['Address'] . "</p>";
-              echo '<p class="whitetext">' . $row['City'] . ", " . $row['Province'] . ", " . $row['Postal Code'] . "</p>";
+              echo '<p class="whitetext">' . $row['City'] . ", " . $row['Province'] . ", " . $row['Postal_Code'] . "</p>";
               echo '<p class="whitetext">' . $row['Telephone']  . "</p>";
               echo '<p></p>';
               echo '<img src="r1.jpg" style="width:100%;" alt="shopimage">';
             }
+            // Close stmt and connection
             unset($stmt);
-            // Close connection
             unset($pdo);
           ?>
         
@@ -88,7 +92,7 @@
           <div class = "neonbox card">
             <h2 class="neonText">LOCATION ON MAP</h2>
             <hr class="neon">
-            <!--<div> that our map will be loaded into -->
+            <!-- <div> that our map will be loaded into -->
             <div id="map"></div>
           </div>
           <!-- Additional Details -->
@@ -110,11 +114,15 @@
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
       }).addTo(map);
 
+      // Gets data from database and converts it into AJAX to create a .json file
+      // Only way I found to grab database information and use it in javascript to alter map information
+      // Source used - https://adnan-tech.com/get-data-from-database-using-ajax-javascript-php-mysql/
       var ajax = new XMLHttpRequest();
       ajax.open("GET", "database.php", true);
       ajax.send();
       ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          // Gets response text and parses it into a .json format to get the entries
           console.log(this.responseText);
           var data = JSON.parse(this.responseText);
           console.log(data); 
