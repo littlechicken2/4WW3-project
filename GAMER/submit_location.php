@@ -8,60 +8,60 @@
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate name
     if(empty(trim($_POST["inputname"]))){
-      $inputname_err = "Please enter a username.";
+      $inputname_err = "Please enter a location name.";
     } elseif(!preg_match('/^[a-zA-Z0-9.]+$/', trim($_POST["inputname"]))){  //my old form validation is so much worse than this example, i decide to use the better one instead
       $inputname_err = "Username can only contain letters, numbers, and period.";
     } else{
-      $inputname_err = trim($_POST["inputname"]);
+      $inputname = trim($_POST["inputname"]);
     }
 
     // Validate address
     if(empty(trim($_POST["inputaddress"]))){
       $inputaddress_err = "Please enter an Address.";     
     } else{
-      $inputaddress_err = trim($_POST["inputaddress"]);
+      $inputaddress = trim($_POST["inputaddress"]);
     }
 
     // Validate city
     if(empty(trim($_POST["inputcity"]))){
       $inputcity_err = "Please enter a City.";     
     } else{
-      $inputcity_err = trim($_POST["inputcity"]);
+      $inputcity = trim($_POST["inputcity"]);
     }
 
     // Validate province
     if(empty(trim($_POST["inputprovince"]))){
       $inputprovince_err = "Please enter a Province.";     
     } else{
-      $inputprovince_err = trim($_POST["inputprovince"]);
+      $inputprovince = trim($_POST["inputprovince"]);
     }
 
     // Validate postal code
     if(empty(trim($_POST["inputpostalcode"]))){
         $inputpostalcode_err = "Please enter a Postal Code.";     
     } else{
-        $inputpostalcode_err = trim($_POST["inputpostalcode"]);
+        $inputpostalcode = trim($_POST["inputpostalcode"]);
     }
 
     // Validate phone
     if(empty(trim($_POST["inputphone"]))){
         $inputphone_err = "Please enter a Phone Number.";     
     } else{
-        $inputphone_err = trim($_POST["inputphone"]);
+        $inputphone = trim($_POST["inputphone"]);
     }
 
     // Validate latitude
     if(empty(trim($_POST["latitude"]))){
         $latitude_err = "Please enter a Latitude.";     
     } else{
-        $latitude_err = trim($_POST["latitude"]);
+        $latitude = trim($_POST["latitude"]);
     }
 
     // Validate longitude
     if(empty(trim($_POST["longitude"]))){
         $longitude_err = "Please enter an Longitude.";     
     } else{
-        $longitude_err = trim($_POST["longitude"]);
+        $longitude = trim($_POST["longitude"]);
     }
   }
 
@@ -70,7 +70,7 @@
   if(empty($inputname_err) && empty($inputaddress_err) && empty($inputcity_err) && empty($inputprovince_err) && empty($inputpostalcode_err) && empty($inputphone_err) && empty($latitude_err) && empty($longitude_err)){
 
     // Prepare an insert statement
-    $sql = "INSERT INTO Locations (Name, Address, City, Province, Postal Code, Latitude, Longitude, Telephone) VALUES (:inputname, :inputaddress, :inputcity, :inputprovince, :inputpostalcode, :latitude, :longitude, :inputphone)";
+    $sql = "INSERT INTO Locations (Name, Address, City, Province, Postal_Code, Latitude, Longitude, Telephone) VALUES (:inputname, :inputaddress, :inputcity, :inputprovince, :inputpostalcode, :latitude, :longitude, :inputphone)";
 
     if($stmt = $pdo->prepare($sql)){
       // Bind variables to the prepared statement as parameters
@@ -96,15 +96,17 @@
       // Attempt to execute the prepared statement
       if($stmt->execute()){
           // Redirect to login page
-          header("location: submit_location.php");
+          echo "Something COREECT.";
+          //header("location: index.php");
       } 
       else{
           echo "Something went wrong.";
       }
+      unset($stmt);
     }
   }
 
-  unset($stmt);
+
   // Close connection
   unset($pdo);
 ?>
@@ -153,8 +155,6 @@
   </style>
 </head>
 <body>
-
-  <img src="10.png" class="bg" alt="bg">
   <div id="container">
     <!-- NavBar -->
     <?php 
@@ -182,47 +182,47 @@
 
           <label id="name"><b>Location Name: </b></label>
           <input type="text" placeholder="Limeridge Mall" class="form-control <?php echo (!empty($inputname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputname; ?>" 
-          id="inputname" required>
+          id="inputname" name="inputname" required>
           <span class="invalid-feedback"><?php echo $inputname_err; ?></span>
           <p></p>
 
           <label id="address"><b>Street Address: </b></label>
-          <input type="text" placeholder="999 Upper Wentworth" class="form-control <?php echo (!empty($inputaddress)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputaddress; ?>" 
-          id="inputaddress" required>
+          <input type="text" placeholder="999 Upper Wentworth" class="form-control <?php echo (!empty($inputaddress_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputaddress; ?>" 
+          id="inputaddress" name="inputaddress" required>
           <span class="invalid-feedback"><?php echo $inputaddress_err; ?></span>
           <p></p>
 
           <label id="city"><b>City: </b></label>
-          <input type="text" placeholder="Hamilton" class="form-control <?php echo (!empty($inputcity)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputcity; ?>"
-          id="inputcity" required>
+          <input type="text" placeholder="Hamilton" class="form-control <?php echo (!empty($inputcity_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputcity; ?>"
+          id="inputcity" name="inputcity" required>
           <span class="invalid-feedback"><?php echo $inputcity_err; ?></span>
           <p></p>
 
           <label id="province"><b>Province: </b></label>
-          <input type="text" placeholder="Ontario" class="form-control <?php echo (!empty($inputprovince)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputprovince; ?>"
-          id="inputprovince" required>
+          <input type="text" placeholder="Ontario" class="form-control <?php echo (!empty($inputprovince_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputprovince; ?>"
+          id="inputprovince" name="inputprovince" required>
           <span class="invalid-feedback"><?php echo $inputprovince_err; ?></span>
           <p></p>
 
           <label id="postal code"><b>Postal Code: </b></label>
-          <input type="text" placeholder="L9A 4X5" class="form-control <?php echo (!empty($inputpostalcode)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputpostalcode; ?>"
-          id="inputpostalcode" required>
+          <input type="text" placeholder="L9A 4X5" class="form-control <?php echo (!empty($inputpostalcode_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputpostalcode; ?>"
+          id="inputpostalcode" name="inputpostalcode" required>
           <span class="invalid-feedback"><?php echo $inputpostalcode_err; ?></span>
           <p></p>
 
           <label id="phone"><b>Phone Number: </b></label>
-          <input type="text" placeholder="905-318-6089" class="form-control <?php echo (!empty($inputphone)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputphone; ?>"
-          id="inputphone" required>
+          <input type="text" placeholder="905-318-6089" class="form-control <?php echo (!empty($inputphone_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $inputphone; ?>"
+          id="inputphone" name="inputphone" required>
           <span class="invalid-feedback"><?php echo $inputphone_err; ?></span>
           <p></p>
 
           <label id="coordinate"><b>(Latitude,Longtitude): </b></label>
-          <input type="number" placeholder="43.217627" class="form-control <?php echo (!empty($latitude)) ? 'is-invalid' : ''; ?>" value="<?php echo $latitude; ?>"
-          id="latitude" required min="-90" max="90" step="0.001">
+          <input type="number" placeholder="43.217627" class="form-control <?php echo (!empty($latitude_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $latitude; ?>"
+          id="latitude" name="latitude" required min="-90" max="90" step="0.001">
           <span class="invalid-feedback"><?php echo $latitude_err; ?></span>
           
-          <input type="number" placeholder="-79.863722" class="form-control <?php echo (!empty($longitude)) ? 'is-invalid' : ''; ?>" value="<?php echo $longitude; ?>"
-          id="longitude" required min="-180" max="180" step="0.001">
+          <input type="number" placeholder="-79.863722" class="form-control <?php echo (!empty($longitude_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $longitude; ?>"
+          id="longitude" name="longitude" required min="-180" max="180" step="0.001">
           <span class="invalid-feedback"><?php echo $longitude_err; ?></span>
           <p></p>
 
