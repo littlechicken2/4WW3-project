@@ -22,53 +22,29 @@
        height:60px;
     }
   </style>
-
-  <!-- Validate Form Script -->
-  <script>
-    function validateForm() {
-      let x = document.forms["login"]["uname"].value;  //the html5 types are so much better
-      let y = document.forms["login"]["psw"].value;
-      if (x == "") {
-        alert("Enter Name");
-        return false;
-      }
-      if(y == "") {   //https://www.javatpoint.com/confirm-password-validation-in-javascript
-        alert("Enter Password");
-        return false;  
-      }  
-      if(y.length < 8) {  
-        alert("Password length must be atleast 8 characters");
-        return false;  
-      }  
-      if(y.length > 15) {  
-        alert("Password length must not exceed 15 characters");
-        return false;  
-      }
-    }
-  </script>
-
 </head>
 
 <body>
   <img src="10.png" class="bg" alt="bg">
   <div id="container">
-    <!-- NavBar Start -->
-    <?php
+    <!-- NavBar -->
+    <?php 
       // Initialize the session
       session_start();
       require_once "config.php";
       if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-        include 'notlogin.inc';
+        include 'notloggedin.inc';
       }
       else{
-        include 'navbar.inc';
+        include 'loggedin.inc';
       }
     ?>
 
     <div class="neonbox">
       <h1 class="neonText animate__animated animate__backInDown">GamerFriend</h1>
       <h2 class="neonText animate__animated animate__backInDown animate__delay-1s">The Ultimate Gameshop Finder</h2>
-      <h3 id="oop"></h3>
+      <p></p>
+      <p class="neonText animate__animated animate__backInDown animate__delay-1s">Search for City or Province</p>
       <!-- Gamgle Search Bar -->
       <form role="search" id="form" class="form1 animate__animated animate__zoomInDown animate__delay-3s">
         <input type="search" id="query" name="search" class="input1" placeholder="Gamgle"
@@ -83,15 +59,7 @@
           input = document.getElementById("query").value;
           searchURL = 'http://18.223.27.232/GAMER/results_sample.php?search=' + input;
           window.location.replace(searchURL);
-          //document.getElementById("oop").textContent = searchURL;
         }
-
-        /*function enter(event){
-          if (event.keyCode == 65){
-            search();
-            document.getElementById("oop").textContent = a;
-          }
-        }*/
       </script>
     </div>
 
