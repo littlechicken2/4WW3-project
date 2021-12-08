@@ -78,10 +78,6 @@
           <div class = "neonbox card">
             <h2 class="neonText">EB games</h2>
                 <?php
-                /*
-                  require_once 'connect.php';
-                  $pdo = new PDO("mysql:host=$host;dbname=$dbname",$username,$password);
-                  */
                   require_once "config.php";
                   //$search = $_GET["search"];
                   $stmt = $pdo->prepare('SELECT * FROM `Locations` WHERE `Name` LIKE :search OR `Address` LIKE :search OR `City` LIKE :search OR `Province` LIKE :search');
@@ -100,8 +96,10 @@
                     echo '<p class="whitetext">' . $row['Telephone']  . "</p>";
                     echo '<p></p>';
                     echo '</div>';
-                    require_once "config.php";
                   }
+                  unset($stmt);
+                  // Close connection
+                  unset($pdo);
                 ?>
           </div>
         </a>
@@ -136,15 +134,6 @@
 
           var html = "";
           for(var a = 0; a < data.length; a++){
-            var name = data[a].Name;
-            var address = data[a].Address;
-            var city = data[a].City;
-            html += "<tr>";
-              html += "<td>" + name + "</td>";
-              html += "<td>" + address + "</td>";
-              html += "<td>" + city + "</td>";
-            html += "</tr>";
-            
             if (a == 0){
               local(data[a]);
               marker1(data[a]);
@@ -152,7 +141,6 @@
             else{
               marker(data[a]);
             }
-            
           }
         }
       };
