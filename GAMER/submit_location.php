@@ -33,6 +33,12 @@
        width:100%;
        height:60px;   /* Height of the footer */
     }
+    input[type="text"]::placeholder {
+      color: grey;
+    }
+    input[type="number"]::placeholder {
+      color: grey;
+    }
   </style>
 </head>
 <body>
@@ -63,27 +69,160 @@
         <div class="neonbox container">
           <p></p>
           <label id="name"><b>Location Name: </b></label>
-          <input type="text" placeholder="Enter Location Name" id="inputname" required>
+          <input type="text" placeholder="Limeridge Mall" id="inputname" required>
           <p></p>
           <label id="address"><b>Street Address: </b></label>
-          <input type="text" placeholder="Enter Street Address" id="inputaddress" required>
+          <input type="text" placeholder="999 Upper Wentworth" id="inputaddress" required>
           <p></p>
           <label id="city"><b>City: </b></label>
-          <input type="text" placeholder="Enter City" id="inputcity" required>
+          <input type="text" placeholder="Hamilton" id="inputcity" required>
           <p></p>
           <label id="province"><b>Province: </b></label>
-          <input type="text" placeholder="Enter Province" id="inputprovince" required>
+          <input type="text" placeholder="Ontario" id="inputprovince" required>
           <p></p>
           <label id="postal code"><b>Postal Code: </b></label>
-          <input type="text" placeholder="Enter Postal Code" id="inputpostalcode" required>
+          <input type="text" placeholder="L9A 4X5" id="inputpostalcode" required>
           <p></p>
           <label id="phone"><b>Phone Number: </b></label>
-          <input type="text" placeholder="Enter Phone Number" id="inputphone" required>
+          <input type="text" placeholder="905-318-6089" id="inputphone" required>
           <p></p>
           <label id="coordinate"><b>(Latitude,Longtitude): </b></label>
-          <input type="number" placeholder="43.263" id="latitude" required min="-90" max="90" step="0.001">
-          <input type="number" placeholder="-79.919" id="longitude" required min="-180" max="180" step="0.001">
+          <input type="number" placeholder="43.217627" id="latitude" required min="-90" max="90" step="0.001">
+          <input type="number" placeholder="-79.863722" id="longitude" required min="-180" max="180" step="0.001">
           <p></p>
+
+          <?php
+            require_once 'config.php';
+
+            // Define variables and initialize with empty values
+            $inputname = $inputaddress = $inputcity = $inputprovince = $inputpostalcode = $inputphone = $latitude = $longitude = "";
+            $inputname_err = $inputaddress_err = $inputcity_err = $inputprovince_err = $inputpostalcode_err = $inputphone_err = $latitude_err = $longitude_err = "";
+
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+              // Validate name
+              if(empty(trim($_POST["inputname"]))){
+                $inputname_err = "Please enter a username.";
+              } elseif(!preg_match('/^[a-zA-Z0-9.]+$/', trim($_POST["inputname"]))){  //my old form validation is so much worse than this example, i decide to use the better one instead
+                $inputname_err = "Username can only contain letters, numbers, and period.";
+              } else{
+                // Prepare a select statement
+                $sql = "SELECT Name FROM Locations WHERE inputname = :inputname";
+                
+                if($stmt = $pdo->prepare($sql)){
+                  // Bind variables to the prepared statement as parameters
+                  $stmt->bindParam(":inputname", $param_inputname, PDO::PARAM_STR);
+                    
+                  // Set parameters
+                  $param_username = trim($_POST["inputname"]);
+                    
+                  // Attempt to execute the prepared statement
+                  if($stmt->execute()){
+                    if($stmt->rowCount() == 1){
+                      $inputname_err = "This name is already taken.";
+                    } else{
+                      $username = trim($_POST["inputname"]);
+                    }
+                    } else{
+                      echo "Oops! Something went wrong. Please try again later.";
+                    }
+                  // Close statement
+                  unset($stmt);
+                }
+              }
+
+              // Validate address
+              if(empty(trim($_POST["inputaddress"]))){
+                $inputaddress_err = "Please enter an Address.";     
+              } else{
+                $inputaddress_err = trim($_POST["inputaddress"]);
+              }
+
+              // Validate city
+              if(empty(trim($_POST["inputcity"]))){
+                $inputcity_err = "Please enter a City.";     
+              } else{
+                $inputcity_err = trim($_POST["inputcity"]);
+              }
+
+              // Validate province
+              if(empty(trim($_POST["inputprovince"]))){
+                $inputprovince_err = "Please enter a Province.";     
+              } else{
+                $inputprovince_err = trim($_POST["inputprovince"]);
+              }
+
+              // Validate postal code
+              if(empty(trim($_POST["inputpostalcode"]))){
+                  $inputpostalcode_err = "Please enter a Postal Code.";     
+              } else{
+                  $inputpostalcode_err = trim($_POST["inputpostalcode"]);
+              }
+
+              // Validate phone
+              if(empty(trim($_POST["inputphone"]))){
+                  $inputphone_err = "Please enter a Phone Number.";     
+              } else{
+                  $inputphone_err = trim($_POST["inputphone"]);
+              }
+
+              // Validate latitude
+              if(empty(trim($_POST["latitude"]))){
+                  $latitude_err = "Please enter a Latitude.";     
+              } else{
+                  $latitude_err = trim($_POST["latitude"]);
+              }
+
+              // Validate longitude
+              if(empty(trim($_POST["longitude"]))){
+                  $longitude_err = "Please enter an Longitude.";     
+              } else{
+                  $longitude_err = trim($_POST["longitude"]);
+              }
+            }
+
+
+            // If all are not null, then submit
+            if(empty($inputname_err) && empty($inputaddress_err) && empty($inputcity_err) && empty($inputprovince_err) && empty($inputpostalcode_err) && empty($inputphone_err) && empty($latitude_err) && empty($longitude_err)){
+
+              // Prepare an insert statement
+              $sql = "INSERT INTO Locations (Name, Address, City, Province, Postal Code, Latitude, Longitude, Phone) VALUES (:inputname, :inputaddress, :inputcity, :inputprovince, :inputpostalcode, :latitude, :longitude, :inputphone)";
+
+              if($stmt = $pdo->prepare($sql)){
+                // Bind variables to the prepared statement as parameters
+                $stmt->bindParam(":inputaddress", $param_inputaddress, PDO::PARAM_STR);
+                $stmt->bindParam(":inputcity", $param_inputcity, PDO::PARAM_STR);
+                $stmt->bindParam(":inputprovince", $param_inputprovince, PDO::PARAM_STR);
+                $stmt->bindParam(":inputpostalcode", $param_inputpostalcode, PDO::PARAM_STR);
+                $stmt->bindParam(":latitude", $param_latitude, PDO::PARAM_STR);
+                $stmt->bindParam(":longitude", $param_longitude, PDO::PARAM_STR);
+                $stmt->bindParam(":inputphone", $param_inputphone, PDO::PARAM_STR);
+                
+                // Set parameters
+                $param_inputname = $inputname;
+                $param_inputaddress = $inputaddress; // Creates a password hash
+                $param_inputcity = $inputcity;
+                $param_inputprovince = $inputprovince;
+                $param_inputpostalcode = $inputpostalcode;
+                $param_latitude = $latitude;
+                $param_longitude = $longitude;
+                $param_inputphone = $inputphone;
+                
+                // Attempt to execute the prepared statement
+                if($stmt->execute()){
+                    // Redirect to login page
+                    header("location: login.php");
+                } 
+                else{
+                    echo "Something went wrong.";
+                }
+              }
+            }
+
+            unset($stmt);
+            // Close connection
+            unset($pdo);
+          ?>
+
           <button id = "show" onclick="showPosition2()"> Show </button>
           <p></p>
           <div id="map"></div>
